@@ -18,6 +18,9 @@ public class GUI {
 	private JFrame frame;
 	private JTable table;
 
+	
+	// Hello there
+	
 	/**
 	 * Launch the application.
 	 */
