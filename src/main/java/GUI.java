@@ -18,9 +18,7 @@ public class GUI {
 	private JFrame frame;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,6 +51,7 @@ public class GUI {
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Refresh");
+		btnNewButton.setBackground(new Color(212, 172, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -69,6 +68,7 @@ public class GUI {
 		panel.add(table);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(212, 172, 255));
 		panel_1.setBounds(341, 118, 313, 110);
 		frame.getContentPane().add(panel_1);
 		
@@ -85,12 +85,13 @@ public class GUI {
 		frame.getContentPane().add(progressBar);
 		
 		JLabel lblNewLabel = new JLabel("WallStreetBits");
-		lblNewLabel.setForeground(new Color(219, 199, 255));
+		lblNewLabel.setForeground(new Color(212, 172, 255));
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 35));
 		lblNewLabel.setBounds(36, 29, 243, 57);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JPanel panel_1_1 = new JPanel();
+		panel_1_1.setBackground(new Color(212, 172, 255));
 		panel_1_1.setBounds(341, 313, 313, 110);
 		frame.getContentPane().add(panel_1_1);
 	}
