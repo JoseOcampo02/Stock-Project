@@ -14,9 +14,6 @@ import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
-//
-
-// Hi Alonzo
 
 public class Main {
 
@@ -54,7 +51,7 @@ public class Main {
 		//from.set(2023, 1, 22, 0, 0, 0); year, month 0-11, day, timestamp
 		//from.add(Calendar.YEAR, -5); // from 5 years ago
 		Scanner scanner = new Scanner(System.in);
-	    System.out.print("\nSpanning Back how many days of of closing marketprice would you like: ");
+	    System.out.print("\nSpanning Back how many days of closing marketprice would you like: ");
 	    int dayX = scanner.nextInt();
 	    scanner.close(); // close the scanner
 	    System.out.println("You entered: " + dayX);
