@@ -14,6 +14,7 @@ import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
+<<<<<<< HEAD
 
 
 class MACD {
@@ -142,6 +143,8 @@ class EMA {
 }
 
 
+=======
+>>>>>>> branch 'master' of https://github.com/JoseOcampo02/Stock-Project.git
 
 public class Main {
 	
@@ -154,12 +157,22 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
   
+<<<<<<< HEAD
 		//How many days back? Defaults to 50 for the default 26 12 9 but could be changed with ease 
 		//Scanner scanner = new Scanner(System.in);
 	    System.out.print("\nSpanning Back how many days of closing marketprice would you like: ");
 	    //int dayX = scanner.nextInt();
 	    int dayX = 70;
 	    //scanner.close();
+=======
+
+		//from.set(2023, 1, 22, 0, 0, 0); year, month 0-11, day, timestamp
+		//from.add(Calendar.YEAR, -5); // from 5 years ago
+		Scanner scanner = new Scanner(System.in);
+	    System.out.print("\nSpanning Back how many days of closing marketprice would you like: ");
+	    int dayX = scanner.nextInt();
+	    scanner.close(); // close the scanner
+>>>>>>> branch 'master' of https://github.com/JoseOcampo02/Stock-Project.git
 	    System.out.println("You entered: " + dayX);
 		
 		
