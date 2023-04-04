@@ -14,8 +14,6 @@ import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
-//
-
 
 public class Main {
 	
@@ -68,17 +66,12 @@ public class Main {
 	    }
 	    
 	    
-	    
-	    //double lastEma = emaArray[emaArray.length - 1];
-	    
 	    return emaArray;
-	    
-	   
-	    
-	    ////////////????????!!!!!!!!!!!!!!!!!!!!
+
 	}
 
-      
+     
+
 	public static void main(String[] args) throws IOException {
   
 		Scanner scanner = new Scanner(System.in);
@@ -124,7 +117,7 @@ public class Main {
 
      //numPeriods should be the desired ema 12, 26, etc 
      //later have user decide
-     int numPeriods = 20;
+     int numPeriods = 26;
      
      double p26ema[] = calculateEMA(closingPrices, numPeriods);
      
@@ -133,10 +126,10 @@ public class Main {
      
      //double macd = p12 - p26; (last elements)
      
-     System.out.println("\nThis is 20 day EMA: " + p26ema[p26ema.length - 1]);
+     System.out.println("\nThis is 26 day EMA: " + p26ema[p26ema.length - 1]);
      System.out.println("\nThis is 12 day EMA: " + p12ema[p12ema.length - 1]);
      
-     //System.out.println("\nThis is MACD: " + (p12ema[p12ema.length - 1] - p26ema[p26ema.length - 1]));
+     System.out.println("\nThis is MACD: " + (p12ema[p12ema.length - 1] - p26ema[p26ema.length - 1]));
      
     }
 
