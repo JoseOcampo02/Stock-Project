@@ -14,14 +14,13 @@ import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
-<<<<<<< HEAD
 
 
 class MACD {
-    private final List<Double> closingPrices;
-    private final int shortPeriod;
-    private final int longPeriod;
-    private final int signalPeriod;
+    private List<Double> closingPrices;
+    private int shortPeriod;
+    private int longPeriod;
+    private int signalPeriod;
     private EMA shortEma;
     private EMA longEma;
     private EMA signalEma;
@@ -41,6 +40,7 @@ class MACD {
         shortEma = new EMA(shortPeriod, closingPrices);
         longEma = new EMA(longPeriod, closingPrices);
 
+        
         List<Double> shortEmaValues = shortEma.calculate(closingPrices);
         List<Double> longEmaValues = longEma.calculate(closingPrices);
 
@@ -55,13 +55,19 @@ class MACD {
         signalEma = new EMA(signalPeriod, macdLine);
         signalLine = signalEma.calculate(macdLine);
 
+        
+        //index where the signal line starts in the MACD line
+        int signalStartIndex = signalPeriod - 1; 
+
         histogram = new ArrayList<Double>();
         for (int i = 0; i < signalLine.size(); i++) {
-            histogram.add(macdLine.get(i) - signalLine.get(i));
+            histogram.add(macdLine.get(i + signalStartIndex) - signalLine.get(i));
         }
+
     }
 
     public void printResults() {
+    	
         System.out.println("\nSize: " + shortEma.getEmaList().size());
         System.out.println("Short-term EMA: ");
         for (Double emaValue : shortEma.getEmaList()) {
@@ -108,20 +114,22 @@ class EMA {
         List<Double> emaValues = new ArrayList<Double>();
         double multiplier = 2.0 / (period + 1);
 
-        // Calculate the initial SMA
-        double sma = 0;
+        // initial SMA
+        double sma = 0.0;
         for (int i = 0; i < period; i++) {
             sma += prices.get(i);
         }
         sma /= period;
 
-        // Initialize the EMA values list with the initial SMA
+        // first ema value is just sma
         emaValues.add(sma);
 
-        // Calculate the remaining EMA values
+        // remaining EMA values
         for (int i = period; i < prices.size(); i++) {
-            double ema = (prices.get(i) - emaValues.get(i - period)) * multiplier + emaValues.get(i - period);
-            emaValues.add(ema);
+            //double ema = (prices.get(i) - emaValues.get(i - period)) * multiplier + emaValues.get(i - period);
+        	double ema = (prices.get(i) - emaValues.get(emaValues.size() - 1)) * multiplier + emaValues.get(emaValues.size() - 1);
+
+        	emaValues.add(ema);
         }
 
         return emaValues;
@@ -143,36 +151,17 @@ class EMA {
 }
 
 
-=======
->>>>>>> branch 'master' of https://github.com/JoseOcampo02/Stock-Project.git
 
 public class Main {
-	
-	
-	  
-	
-	 
-
-     
 
 	public static void main(String[] args) throws IOException {
   
-<<<<<<< HEAD
 		//How many days back? Defaults to 50 for the default 26 12 9 but could be changed with ease 
 		//Scanner scanner = new Scanner(System.in);
 	    System.out.print("\nSpanning Back how many days of closing marketprice would you like: ");
 	    //int dayX = scanner.nextInt();
-	    int dayX = 70;
+	    int dayX = 120; // this is like 3 months
 	    //scanner.close();
-=======
-
-		//from.set(2023, 1, 22, 0, 0, 0); year, month 0-11, day, timestamp
-		//from.add(Calendar.YEAR, -5); // from 5 years ago
-		Scanner scanner = new Scanner(System.in);
-	    System.out.print("\nSpanning Back how many days of closing marketprice would you like: ");
-	    int dayX = scanner.nextInt();
-	    scanner.close(); // close the scanner
->>>>>>> branch 'master' of https://github.com/JoseOcampo02/Stock-Project.git
 	    System.out.println("You entered: " + dayX);
 		
 		
@@ -180,7 +169,9 @@ public class Main {
 		
 		Calendar from = Calendar.getInstance();
 		from.add(Calendar.DAY_OF_MONTH, -dayX); // set the 'from' calendar x(neg) days ago/// needs to be larger than desired days to skip over closed days
-        Calendar to = Calendar.getInstance();
+		//from.add(Calendar.DAY_OF_MONTH, -dayX * 3);
+		//defult 3 x of 3 months
+		Calendar to = Calendar.getInstance();
         Stock google = YahooFinance.get(ticker, from, to, Interval.DAILY);
         
         
@@ -189,7 +180,6 @@ public class Main {
         
       
         List<HistoricalQuote> history = google.getHistory();
-        double[] closingPrices = new double[marketDays];
         List<Double> closingPricesL = new ArrayList<Double>();
         
         //fills up closingPrices array with closing prices
@@ -198,7 +188,6 @@ public class Main {
        
            double closePrice = quote.getAdjClose().doubleValue(); // get the closing price of the quote // adj stock splits // originally in big decimal
            closingPricesL.add(quote.getAdjClose().doubleValue());
-           closingPrices[i] = closePrice; // add the closing price to the array
 
            //this just info print
            Calendar date = quote.getDate(); // get the date of the historical quote
@@ -215,14 +204,6 @@ public class Main {
      
         MACD myMACD = new MACD(closingPricesL, 12, 26, 9);
         myMACD.printResults();
-        
-        EMA shortEMA = new EMA(12, closingPricesL);
-        
-        shortEMA.printEma();
-        
-        EMA longEMA = new EMA(26, closingPricesL);
-        
-        longEMA.printEma();
         
   
     }
