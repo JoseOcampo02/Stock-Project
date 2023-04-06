@@ -152,57 +152,72 @@ class EMA {
 
 
 
+class DataCollection {
+    private String ticker;
+    private int daysBack;
+    private List<Double> closingPrices;
+
+    public DataCollection(String ticker, int daysBack) throws IOException {
+        this.ticker = ticker;
+        this.daysBack = daysBack;
+        collectData();
+    }
+
+    private void collectData() throws IOException {
+        Calendar from = Calendar.getInstance();
+        from.add(Calendar.DAY_OF_MONTH, -daysBack);
+        Calendar to = Calendar.getInstance();
+        Stock stock = YahooFinance.get(ticker, from, to, Interval.DAILY);
+        List<HistoricalQuote> history = stock.getHistory();
+        closingPrices = new ArrayList<Double>();
+        for (HistoricalQuote quote : history) {
+            double closePrice = quote.getAdjClose().doubleValue();
+            closingPrices.add(closePrice);
+        }
+    }
+
+    public String getTicker() {
+        return ticker;
+    }
+
+    public int getDaysBack() {
+        return daysBack;
+    }
+
+    public List<Double> getClosingPrices() {
+        return closingPrices;
+    }
+
+    public int getMarketDays() {
+        return closingPrices.size();
+    }
+    
+    public void printClosingPrices() {
+        int i = 0;
+        for (double price : closingPrices) {
+            System.out.println(i + " Closing price: " + price);
+            i++;
+        }
+    }
+}
+
+
+
+
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+		
+		
   
-		//How many days back? Defaults to 50 for the default 26 12 9 but could be changed with ease 
-		//Scanner scanner = new Scanner(System.in);
-	    System.out.print("\nSpanning Back how many days of closing marketprice would you like: ");
-	    //int dayX = scanner.nextInt();
-	    int dayX = 120; // this is like 3 months
-	    //scanner.close();
-	    System.out.println("You entered: " + dayX);
+		List<Double> hellaSwag = new ArrayList<Double>();
+        DataCollection history =  new DataCollection("AAPL", 120);
 		
-		
-	    String ticker = "AAPL";
-		
-		Calendar from = Calendar.getInstance();
-		from.add(Calendar.DAY_OF_MONTH, -dayX); // set the 'from' calendar x(neg) days ago/// needs to be larger than desired days to skip over closed days
-		//from.add(Calendar.DAY_OF_MONTH, -dayX * 3);
-		//defult 3 x of 3 months
-		Calendar to = Calendar.getInstance();
-        Stock google = YahooFinance.get(ticker, from, to, Interval.DAILY);
-        
-        
-        int marketDays = google.getHistory().size();
-        System.out.println("\nOpen Market Days: " + marketDays + " This is how much data will be considered in the calculation.");
-        
-      
-        List<HistoricalQuote> history = google.getHistory();
-        List<Double> closingPricesL = new ArrayList<Double>();
-        
-        //fills up closingPrices array with closing prices
-        int i = 0; 
-        for (HistoricalQuote quote : history) {
-       
-           double closePrice = quote.getAdjClose().doubleValue(); // get the closing price of the quote // adj stock splits // originally in big decimal
-           closingPricesL.add(quote.getAdjClose().doubleValue());
-
-           //this just info print
-           Calendar date = quote.getDate(); // get the date of the historical quote
-           int year = date.get(Calendar.YEAR); // extract the year from the date
-           int month = date.get(Calendar.MONTH) + 1; // extract the month from the date (note that Calendar.MONTH is zero-based, so we add 1)
-           int dayOfMonth = date.get(Calendar.DAY_OF_MONTH); // extract the day of the month from the date
-           System.out.println(i + "Historical quote date: " + year + "-" + month + "-" + dayOfMonth + "\tPrice "+ closePrice);
-           //
-           
-           i++;  
-        }
-        
-        
+        hellaSwag = history.getClosingPrices();
      
-        MACD myMACD = new MACD(closingPricesL, 12, 26, 9);
+        
+  
+        MACD myMACD = new MACD(hellaSwag, 12, 26, 9);
         myMACD.printResults();
         
   
