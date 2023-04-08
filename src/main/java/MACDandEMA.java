@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -98,6 +99,22 @@ class MACD {
             System.out.println(signalValue);
         }
     }
+    
+    
+    
+    public List<Double> getMACDline() {
+		return macdLine;
+	}
+    
+    public List<Double> getSignalLine() {
+		return signalLine;
+	}
+    
+    public List<Double> getHistogram() {
+		return histogram;
+	}
+    
+    
 }
 
 class EMA {
@@ -203,8 +220,7 @@ class DataCollection {
 
 
 
-
-public class Main {
+public class MACDandEMA {
 
 	public static void main(String[] args) throws IOException {
 		
