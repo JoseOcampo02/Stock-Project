@@ -80,14 +80,16 @@ public class SampleController implements Initializable {
 	    
 	    
 	    
-	    
-	    // structure for line chart (indiv line)  
+	    //offsets for lines
 	    int offsetSignalLine = realData.size() - myMACD.getSignalLine().size();
 	    int offsetMACDLine = realData.size() - myMACD.getMACDline().size();
 	    int offsetHistogram = realData.size() - myMACD.getHistogram().size();
 	    
+	    
+	    // structure for line chart (individual line)  
 	    Series<Number, Number> histogramLine = new XYChart.Series<>();
 	    histogramLine.setName("Histogram");
+	    
 	    for (int i = 0; i < myMACD.getHistogram().size(); i++) {
 	    	histogramLine.getData().add(new Data<Number, Number>(i + 1 + offsetHistogram, myMACD.getHistogram().get(i)));
 	    }
@@ -107,19 +109,20 @@ public class SampleController implements Initializable {
 	    
 	    
 	    
-	    // adds to series to lineChart
-	    lineChart.getData().add(histogramLine);
 	    
+	    // adds lines to lineChart
+	    lineChart.getData().add(histogramLine);
 	    lineChart.getData().add(signalLine);
 	    lineChart.getData().add(macdline);
 	    
 	    
 	    
 	    
-	    
+	    //adds price line to priceChart
 	    priceChart.getData().add(priceLine);
-	    
-	    
+
+	   
+
 	}
 	
 	
