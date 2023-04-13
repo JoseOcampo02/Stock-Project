@@ -39,6 +39,7 @@
     <BorderPane prefHeight="538.0" prefWidth="848.0" style="-fx-background-color: #5997e3;" BorderPane.alignment="CENTER">
          <center>
             <LineChart fx:id="priceChart" prefHeight="305.0" prefWidth="800.0" title="Price Chart" BorderPane.alignment="CENTER">
+
               <xAxis>
                 <NumberAxis side="BOTTOM" />
               </xAxis>
@@ -54,6 +55,7 @@
 </center>
    <bottom>
       <LineChart fx:id="lineChart" prefHeight="458.0" prefWidth="1072.0" title="MACD" BorderPane.alignment="CENTER">
+
         <xAxis>
           <NumberAxis side="BOTTOM" />
         </xAxis>
