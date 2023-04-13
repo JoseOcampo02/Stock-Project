@@ -37,8 +37,8 @@
    </top>
 <center>
     <BorderPane prefHeight="538.0" prefWidth="848.0" style="-fx-background-color: #5997e3;" BorderPane.alignment="CENTER">
-         <center>
-            <LineChart fx:id="priceChart" prefHeight="305.0" prefWidth="800.0" title="Price Chart" BorderPane.alignment="CENTER">
+         <left>
+            <LineChart fx:id="priceChart" prefHeight="308.0" prefWidth="751.0" title="Price Chart" BorderPane.alignment="CENTER">
               <xAxis>
                 <NumberAxis side="BOTTOM" />
               </xAxis>
@@ -49,7 +49,7 @@
                   <Cursor fx:constant="CROSSHAIR" />
                </cursor>
             </LineChart>
-         </center>
+         </left>
     </BorderPane>
 </center>
    <bottom>
