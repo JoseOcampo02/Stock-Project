@@ -39,7 +39,7 @@ public class SampleController implements Initializable {
     @FXML
     private LineChart<Number, Number> priceChart;
     
-
+    private Tooltip tooltip;
     
     
 	@Override
@@ -121,6 +121,15 @@ public class SampleController implements Initializable {
 	    priceChart.getData().add(priceLine);
 
 	   
+	 // Add mouseMoved event to priceChart
+	    priceChart.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+	        handleMouseMove(priceChart, event);
+	    });
+
+	    // Add mouseMoved event to lineChart
+	    lineChart.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+	        handleMouseMove(lineChart, event);
+	    });
 
 
 	    
@@ -130,10 +139,50 @@ public class SampleController implements Initializable {
 	
 
 
+	
+	private void handleMouseMove(LineChart<Number, Number> chart, MouseEvent event) {
+	    if (tooltip == null) {
+	        tooltip = new Tooltip();
+	    }
+
+	    double mouseX = event.getX();
+	    double mouseY = event.getY();
+
+	    // Calculate X-axis value based on mouse position
+	    NumberAxis xAxis = (NumberAxis) chart.getXAxis();
+	    double xValue = xAxis.getValueForDisplay(mouseX).doubleValue();
+
+	    // Create a StringBuilder to build the tooltip text
+	    StringBuilder tooltipText = new StringBuilder("X: " + String.format("%.2f", xValue) + "\n");
+
+	    // Loop through all Series in the chart
+	    for (XYChart.Series<Number, Number> series : chart.getData()) {
+	        // Find the closest data point to the current X-axis value
+	        Data<Number, Number> closestDataPoint = null;
+	        double minDistance = Double.MAX_VALUE;
+	        for (Data<Number, Number> data : series.getData()) {
+	            double dataXValue = data.getXValue().doubleValue();
+	            double distance = Math.abs(dataXValue - xValue);
+	            if (distance < minDistance) {
+	                minDistance = distance;
+	                closestDataPoint = data;
+	            }
+	        }
+
+	        // Append the data point to the tooltip text
+	        if (closestDataPoint != null) {
+	            tooltipText.append(series.getName() + ": Y(" + String.format("%.2f", closestDataPoint.getYValue().doubleValue()) + ")\n");
+	        }
+	    }
+
+	    // Set the tooltip text and show it
+	    tooltip.setText(tooltipText.toString());
+	    Node node = (Node) event.getSource();
+	    Point2D point = node.localToScene(mouseX, mouseY);
+	    tooltip.show(node, point.getX() + node.getScene().getWindow().getX() + 15, point.getY() + node.getScene().getWindow().getY() + 15);
+	}
 
 	
 	
 	
-	
 }
-	
