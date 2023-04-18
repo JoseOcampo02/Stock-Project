@@ -4,41 +4,88 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="820.0" prefWidth="1219.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SampleController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SampleController">
    <left>
       <VBox prefHeight="478.0" prefWidth="147.0" style="-fx-background-color: #5692db;" BorderPane.alignment="CENTER">
          <children>
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Profile" textFill="WHITE" />
+            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Profile" textFill="WHITE">
+               <graphic>
+                  <ImageView id="profile_icon" fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@profile.png" />
+                     </image></ImageView>
+               </graphic></Button>
             <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Account Summary" textFill="WHITE">
                <font>
                   <Font size="12.0" />
                </font>
+               <graphic>
+                  <ImageView id="account_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@investments.png" />
+                     </image></ImageView>
+               </graphic>
             </Button>
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Investments" textFill="WHITE" />
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Market" textFill="WHITE" />
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Analysis" textFill="WHITE" />
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Charts" textFill="WHITE" />
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Reports" textFill="WHITE" />
+            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Investments" textFill="WHITE">
+               <graphic>
+                  <ImageView id="investments_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@money%20icon.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Market" textFill="WHITE">
+               <graphic>
+                  <ImageView id="market_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@market.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Analysis" textFill="WHITE">
+               <graphic>
+                  <ImageView id="analysis_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@statistics.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Charts" textFill="WHITE">
+               <graphic>
+                  <ImageView id="charts_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@chart.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Reports" textFill="WHITE">
+               <graphic>
+                  <ImageView id="reports_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@reports.png" />
+                     </image></ImageView>
+               </graphic></Button>
          </children>
       </VBox>
    </left>
    <top>
       <HBox prefHeight="54.0" prefWidth="875.0" style="-fx-background-color: #2f68ad;" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="56.0" prefWidth="256.0" text="WallStreetBits LOGO " />
+            <ImageView id="logo" fitHeight="53.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@wallstreetbits_logo.png" />
+               </image>
+            </ImageView>
          </children>
       </HBox>
    </top>
 <center>
     <BorderPane prefHeight="538.0" prefWidth="848.0" style="-fx-background-color: #5997e3;" BorderPane.alignment="CENTER">
          <center>
-            <LineChart fx:id="priceChart" prefHeight="305.0" prefWidth="800.0" title="Price Chart" BorderPane.alignment="CENTER">
+            <LineChart fx:id="priceChart" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="Price Chart" BorderPane.alignment="CENTER">
 
               <xAxis>
                 <NumberAxis side="BOTTOM" />
@@ -51,20 +98,20 @@
                </cursor>
             </LineChart>
          </center>
+         <top>
+            <LineChart fx:id="lineChart" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="MACD" BorderPane.alignment="CENTER">
+      
+              <xAxis>
+                <NumberAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+               <cursor>
+                  <Cursor fx:constant="CROSSHAIR" />
+               </cursor>
+            </LineChart>
+         </top>
     </BorderPane>
 </center>
-   <bottom>
-      <LineChart fx:id="lineChart" prefHeight="458.0" prefWidth="1072.0" title="MACD" BorderPane.alignment="CENTER">
-
-        <xAxis>
-          <NumberAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-         <cursor>
-            <Cursor fx:constant="CROSSHAIR" />
-         </cursor>
-      </LineChart>
-   </bottom>
 </BorderPane>

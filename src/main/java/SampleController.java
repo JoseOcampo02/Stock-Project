@@ -1,4 +1,6 @@
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 
@@ -40,6 +42,16 @@ public class SampleController implements Initializable {
     private LineChart<Number, Number> priceChart;
     
     private Tooltip tooltip;
+    
+    @FXML
+    
+    ImageView imageView;
+    
+    Image myImage = new Image(getClass().getResourceAsStream("chart.png"));
+    
+    public void displayImage() {
+     imageView.setImage(myImage);
+    }
     
     
 	@Override

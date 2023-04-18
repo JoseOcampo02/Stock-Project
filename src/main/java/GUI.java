@@ -18,7 +18,7 @@ public class GUI extends Application {
 
 
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setTitle("yoloBot");
+			primaryStage.setTitle("WallStreetBits");
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
