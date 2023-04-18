@@ -14,5 +14,11 @@
       <artifactId>slf4j-simple</artifactId>
       <version>1.7.36</version>
     </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx</artifactId>
+      <version>20</version>
+      <type>pom</type>
+    </dependency>
   </dependencies>
 </project>
