@@ -7,14 +7,51 @@ import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
+/**
+ * 
+ * @author Jose E Ocampo
+ * Performs linear regression analysis on the given stock
+ * by constructing a line of best fit (LoBF) and checking
+ * whether the slope is positive or negative
+ *
+ */
+
 public class LinRegAnalysis {
 
+    /**
+     * Represents the computed slope of LoBF
+     */
     private double slope;
+    
+    /**
+     * Represents the computed y-intecept of LoBF
+     * (Important for calculating future stock price)
+     */
     private double yInt;
+    
+    /**
+     * Represents computed prediction one day into the future
+     */
     private BigDecimal OneDay;
+    
+    /**
+     * Represents computed prediction two days into the future
+     */
     private BigDecimal TwoDay;
+    
+    /**
+     * Represents computed prediction three days into the future
+     */
     private BigDecimal ThreeDay;
     
+    /**
+     * 
+     * Constructs LinRegAnalysis object that automatically performs
+     * the necessary computations and analysis upon creation for easy access
+     * @param myStock Stock to perform linear regression analysis on
+     * @throws IOException Throws IOException
+     * 
+     */
     public LinRegAnalysis(Stock myStock) throws IOException {   // Creating a LinRegAnalysis object will automatically
                                                                 // perform the necessary calculations for a 1, 2, or 3
                                                                 // day prediction into the future for a given stock
@@ -26,6 +63,12 @@ public class LinRegAnalysis {
         
     }
     
+    /**
+     * 
+     * Main for testing
+     * @throws IOException
+     *
+     */
     public static void main(String[] args) throws IOException{
         
         Stock SMP500 = YahooFinance.get("^GSPC");
@@ -37,6 +80,13 @@ public class LinRegAnalysis {
         
     }
     
+    /**
+     * 
+     * @param myStock Stock to get data on
+     * @return Array that is formatted to represent xy-coordinates in a plane (x = days, y = price)
+     * @throws IOException
+     * 
+     */
     private BigDecimal[] getStockData(Stock myStock) throws IOException{
         
         Calendar from = Calendar.getInstance();
@@ -72,6 +122,12 @@ public class LinRegAnalysis {
         
     }
     
+    /**
+     * 
+     * Computes the slope and y-intercept of LoBF using the method of least squares
+     * @param myData Array that is formatted to represent xy-coordinates in a plane (x = days, y = price)
+     * 
+     */
     private void getSlopeAndYInt(BigDecimal[] myData) {
         
         double sumX = 0;
@@ -96,7 +152,10 @@ public class LinRegAnalysis {
         
     }
     
-    
+    /**
+     * Computes stock price one, two, and three days into the future based on LoBF
+     * @param i Represents 
+     */
     private void CalcPredictions(int i) {
         
         this.OneDay = BigDecimal.valueOf(((this.slope * i) + this.yInt)).setScale(2, RoundingMode.HALF_UP);
