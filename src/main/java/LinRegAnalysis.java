@@ -10,6 +10,7 @@ import yahoofinance.histquotes.Interval;
 /**
  * 
  * @author Jose E Ocampo
+ * 03/27/2023
  * Performs linear regression analysis on the given stock
  * by constructing a line of best fit (LoBF) and checking
  * whether the slope is positive or negative
