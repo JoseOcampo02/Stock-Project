@@ -64,7 +64,7 @@ public class SampleController implements Initializable {
         DataCollection history = null;
         
 		try {
-			history = new DataCollection("AAPL", 120);
+			history = new DataCollection("TSLA", 120);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
