@@ -154,7 +154,7 @@ public class LinRegAnalysis {
     
     /**
      * Computes stock price one, two, and three days into the future based on LoBF
-     * @param i Represents 
+     * @param i Represents one day into the future ( f(i) = price 1 day into future)
      */
     private void CalcPredictions(int i) {
         
