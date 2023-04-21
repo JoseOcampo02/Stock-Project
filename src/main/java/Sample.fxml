@@ -6,10 +6,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+
+
 
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SampleController">
    <left>
@@ -84,34 +87,36 @@
    </top>
 <center>
     <BorderPane prefHeight="538.0" prefWidth="848.0" style="-fx-background-color: #5997e3;" BorderPane.alignment="CENTER">
-         <center>
-            <LineChart fx:id="priceChart" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="Price Chart" BorderPane.alignment="CENTER">
-
-              <xAxis>
-                <NumberAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-               <cursor>
-                  <Cursor fx:constant="CROSSHAIR" />
-               </cursor>
-            </LineChart>
-         </center>
-         <top>
-            <LineChart fx:id="lineChart" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="MACD" BorderPane.alignment="CENTER">
-      
-              <xAxis>
-                <NumberAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-               <cursor>
-                  <Cursor fx:constant="CROSSHAIR" />
-               </cursor>
-            </LineChart>
-         </top>
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <LineChart fx:id="lineChart" layoutX="35.0" layoutY="507.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="MACD">
+            
+                                      <xAxis>
+                      <NumberAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                     <cursor>
+                        <Cursor fx:constant="CROSSHAIR" />
+                     </cursor>
+                  </LineChart>
+                  <LineChart fx:id="priceChart" layoutX="24.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="Price Chart">
+            
+                                                  <xAxis>
+                      <NumberAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                     <cursor>
+                        <Cursor fx:constant="CROSSHAIR" />
+                     </cursor>
+                  </LineChart>
+               </children>
+            </AnchorPane>
+         </left>
     </BorderPane>
 </center>
 </BorderPane>
