@@ -10,6 +10,7 @@ import yahoofinance.histquotes.Interval;
 /**
  * 
  * @author Jose E Ocampo
+ * 03/27/2023
  * Performs linear regression analysis on the given stock
  * by constructing a line of best fit (LoBF) and checking
  * whether the slope is positive or negative
@@ -60,23 +61,6 @@ public class LinRegAnalysis {
         BigDecimal[] input = getStockData(myStock);             // Requests and cleans up data for calculations
         getSlopeAndYInt(input);
         CalcPredictions(input.length); 
-        
-    }
-    
-    /**
-     * 
-     * Main for testing
-     * @throws IOException
-     *
-     */
-    public static void main(String[] args) throws IOException{
-        
-        Stock SMP500 = YahooFinance.get("^GSPC");
-        LinRegAnalysis myAnalysis = new LinRegAnalysis(SMP500);
-        System.out.println("Current price: " + SMP500.getQuote().getPrice());
-        System.out.println("One day Prediction: " + myAnalysis.getOneDay());
-        System.out.println("Two day Prediction: " + myAnalysis.getTwoDay()); 
-        System.out.println("Three day Prediction: " + myAnalysis.getThreeDay());
         
     }
     
@@ -154,7 +138,7 @@ public class LinRegAnalysis {
     
     /**
      * Computes stock price one, two, and three days into the future based on LoBF
-     * @param i Represents 
+     * @param i Represents one day into the future ( f(i) = price 1 day into future)
      */
     private void CalcPredictions(int i) {
         
