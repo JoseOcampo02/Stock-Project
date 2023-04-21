@@ -65,23 +65,6 @@ public class LinRegAnalysis {
     
     /**
      * 
-     * Main for testing
-     * @throws IOException
-     *
-     */
-    public static void main(String[] args) throws IOException{
-        
-        Stock SMP500 = YahooFinance.get("^GSPC");
-        LinRegAnalysis myAnalysis = new LinRegAnalysis(SMP500);
-        System.out.println("Current price: " + SMP500.getQuote().getPrice());
-        System.out.println("One day Prediction: " + myAnalysis.getOneDay());
-        System.out.println("Two day Prediction: " + myAnalysis.getTwoDay()); 
-        System.out.println("Three day Prediction: " + myAnalysis.getThreeDay());
-        
-    }
-    
-    /**
-     * 
      * @param myStock Stock to get data on
      * @return Array that is formatted to represent xy-coordinates in a plane (x = days, y = price)
      * @throws IOException
