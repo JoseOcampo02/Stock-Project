@@ -12,6 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
+
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SampleController">
    <left>
       <VBox prefHeight="478.0" prefWidth="147.0" style="-fx-background-color: #5692db;" BorderPane.alignment="CENTER">

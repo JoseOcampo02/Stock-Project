@@ -43,6 +43,12 @@ public class SampleController implements Initializable {
     
     private Tooltip tooltip;
     
+    /**
+     * 
+     * @author Alonzo Garcia
+     * This allows the images to be seen by the user.
+     */
+    
     @FXML
     
     ImageView imageView;
