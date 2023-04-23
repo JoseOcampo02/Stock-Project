@@ -30,8 +30,38 @@ import yahoofinance.histquotes.Interval;
 import javafx.scene.control.Tooltip;
 import javafx.geometry.Point2D;
 
-
-//import com.example.main.Main;
+/**
+ * SampleController.java
+ * Date: April 18, 2023
+ 
+ * This class is a JavaFX controller responsible for managing the UI, calling data collector, managing mouse move events, displaying stock data,
+ * and MACD indicators on line charts.
+ * 
+ *
+ * Important Functions:
+ * - initialize(URL arg0, ResourceBundle arg1): Initializes the controller and sets up the charts.
+ *   Input: URL arg0 and ResourceBundle arg1 (JavaFX framework inputs).
+ *   Output: None.
+ *
+ * - handleMouseMove(LineChart<Number, Number> chart, MouseEvent event): Handles mouse movement
+ *   events on line charts and displays a tooltip with data values.
+ *   Input: LineChart<Number, Number> chart and MouseEvent event.
+ *   Output: None.
+ *   
+ * Important Data Structures:
+ * - ArrayList<Double> closingPrices: Stores the closing prices of the stock.
+ * - Series<Number, Number> lines: Stores the index and data value of lines that will be displayed.
+ * - LineChart<Number, Number> lineChart: Displays the MACD indicators.
+ * - LineChart<Number, Number> priceChart: Displays the stock price.
+ * 
+ * Algorithms: None.
+ * 
+ *
+ *   
+ *   
+ * @version 1.0
+ * @author Christian Jaime
+ */
 
 public class SampleController implements Initializable {	
 	
@@ -42,6 +72,7 @@ public class SampleController implements Initializable {
     private LineChart<Number, Number> priceChart;
     
     private Tooltip tooltip;
+  
     
     /**
      * 
@@ -60,6 +91,16 @@ public class SampleController implements Initializable {
     }
     
     
+   
+  
+    
+    /**
+     * Initializes the controller and sets up the charts.
+     *
+     * @param arg0 The URL for the FXML file. (JavaFX framework input)
+     * @param arg1 The ResourceBundle for the FXML file. (JavaFX framework input)
+     * @author Christian Jaime
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -70,7 +111,7 @@ public class SampleController implements Initializable {
         DataCollection history = null;
         
 		try {
-			history = new DataCollection("TSLA", 120);
+			history = new DataCollection("AAPL", 190);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,13 +122,7 @@ public class SampleController implements Initializable {
      
 	    
 	    //create MACD object
-	    
 	    MACD myMACD = new MACD(realData, 12, 26, 9);
-	    
-	    
-	    
-	    
-	    
 	    
 	    //offsets for lines
 	    int offsetSignalLine = realData.size() - myMACD.getSignalLine().size();
@@ -96,8 +131,6 @@ public class SampleController implements Initializable {
 	    
 	    
 	    // structure for line chart (individual line)  
-	    
-	    
 	    Series<Number, Number> priceLine = new XYChart.Series<>();
 	    priceLine.setName("Price");
 	    for (int i = 0; i < realData.size(); i++) {
@@ -128,9 +161,9 @@ public class SampleController implements Initializable {
 	    
 	    
 	    // adds lines to lineChart
-	    lineChart.getData().add(histogramLine);
-	    lineChart.getData().add(signalLine);
 	    lineChart.getData().add(macdline);
+	    lineChart.getData().add(signalLine);
+	    lineChart.getData().add(histogramLine);
 	    
 	    
 	    
@@ -139,12 +172,12 @@ public class SampleController implements Initializable {
 	    priceChart.getData().add(priceLine);
 
 	   
-	 // Add mouseMoved event to priceChart
+	   // Adds mouseMoved event to priceChart
 	    priceChart.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 	        handleMouseMove(priceChart, event);
 	    });
 
-	    // Add mouseMoved event to lineChart
+	    // Adds mouseMoved event to lineChart
 	    lineChart.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
 	        handleMouseMove(lineChart, event);
 	    });
@@ -155,9 +188,19 @@ public class SampleController implements Initializable {
 	
 	
 	
-
-
 	
+	
+	
+	
+	
+
+	 /**
+     * Handles mouse movement events on line charts and displays a tooltip with data values.
+     *
+     * @param chart The LineChart instance where the mouse event occurred.
+     * @param event The MouseEvent containing information about the mouse event.
+     * @author Christian Jaime
+     */
 	private void handleMouseMove(LineChart<Number, Number> chart, MouseEvent event) {
 	    if (tooltip == null) {
 	        tooltip = new Tooltip();
@@ -166,7 +209,7 @@ public class SampleController implements Initializable {
 	    double mouseX = event.getX();
 	    double mouseY = event.getY();
 
-	    // Calculate X-axis value based on mouse position
+	    // Calculate X axis value based on mouse position
 	    NumberAxis xAxis = (NumberAxis) chart.getXAxis();
 	    double xValue = xAxis.getValueForDisplay(mouseX).doubleValue();
 
