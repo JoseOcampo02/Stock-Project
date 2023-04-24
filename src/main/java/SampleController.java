@@ -43,10 +43,14 @@ public class SampleController implements Initializable {
     
     private Tooltip tooltip;
     
+    @FXML
+    private Label TSLAPrice;
+    
     /**
-     * 
-     * @author Alonzo Garcia
-     * This allows the images to be seen by the user.
+      
+      @author Alonzo Garcia
+      This allows the images to be seen by the user.
+      
      */
     
     @FXML
@@ -77,7 +81,7 @@ public class SampleController implements Initializable {
 		}
 		realData = history.getClosingPrices();
 	
-     
+		//TSLAPrice.setText(realData);
      
 	    
 	    //create MACD object
