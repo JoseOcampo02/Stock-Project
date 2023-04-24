@@ -5,6 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,11 +15,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.scene.chart.NumberAxis;
-
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
@@ -105,7 +109,8 @@ public class SampleController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		
-		
+		/*
+	    
 		//collects data from yahooFinace
 		List<Double> realData = new ArrayList<Double>();
         DataCollection history = null;
@@ -182,7 +187,7 @@ public class SampleController implements Initializable {
 	        handleMouseMove(lineChart, event);
 	    });
 
-
+        */
 	    
 	}
 	
@@ -243,7 +248,53 @@ public class SampleController implements Initializable {
 	    tooltip.show(node, point.getX() + node.getScene().getWindow().getX() + 15, point.getY() + node.getScene().getWindow().getY() + 15);
 	}
 
+	public void changeToProfileView(ActionEvent event) throws IOException {
+        
+        Parent profileParent = FXMLLoader.load(getClass().getResource("profileView.fxml"));
+        Scene profileViewScene = new Scene(profileParent);
+        
+        // This line gets the Stage information
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(profileViewScene);
+        window.show();
+        
+    }
 	
+	public void changeToInvestmentsView(ActionEvent event) throws IOException {
+        
+        Parent profileParent = FXMLLoader.load(getClass().getResource("investmentsView.fxml"));
+        Scene profileViewScene = new Scene(profileParent);
+        
+        // This line gets the Stage information
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(profileViewScene);
+        window.show();
+        
+    }
+	
+	public void changeToAnalysisView(ActionEvent event) throws IOException {
+        
+        Parent profileParent = FXMLLoader.load(getClass().getResource("AnalysisView.fxml"));
+        Scene profileViewScene = new Scene(profileParent);
+        
+        // This line gets the Stage information
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(profileViewScene);
+        window.show();
+        
+    }
+	
+	public void changeToChartsView(ActionEvent event) throws IOException {
+        
+        Parent profileParent = FXMLLoader.load(getClass().getResource("chartsView.fxml"));
+        Scene profileViewScene = new Scene(profileParent);
+        
+        // This line gets the Stage information
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(profileViewScene);
+        window.show();
+        
+    }
 	
 	
 }
