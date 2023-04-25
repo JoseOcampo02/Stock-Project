@@ -21,8 +21,7 @@ public class GUI extends Application {
 
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
 
-			Scene scene = new Scene(root, 1000, 1000); // 500 500
-
+			Scene scene = new Scene(root, 800, 600); // 500 500
 
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setTitle("WallStreetBits");

@@ -16,7 +16,7 @@
    <left>
       <VBox prefHeight="478.0" prefWidth="147.0" style="-fx-background-color: #5692db;" BorderPane.alignment="CENTER">
          <children>
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Profile" textFill="WHITE">
+            <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToProfileView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Profile" textFill="WHITE">
                <graphic>
                   <ImageView id="profile_icon" fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -34,7 +34,7 @@
                      </image></ImageView>
                </graphic>
             </Button>
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Investments" textFill="WHITE">
+            <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToInvestmentsView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Investments" textFill="WHITE">
                <graphic>
                   <ImageView id="investments_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -48,14 +48,14 @@
                         <Image url="@market.png" />
                      </image></ImageView>
                </graphic></Button>
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Analysis" textFill="WHITE">
+            <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToAnalysisView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Analysis" textFill="WHITE">
                <graphic>
                   <ImageView id="analysis_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@statistics.png" />
                      </image></ImageView>
                </graphic></Button>
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Charts" textFill="WHITE">
+            <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToChartsView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Charts" textFill="WHITE">
                <graphic>
                   <ImageView id="charts_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -100,7 +100,7 @@
                         <Cursor fx:constant="CROSSHAIR" />
                      </cursor>
                   </LineChart>
-                  <LineChart fx:id="priceChart" layoutX="24.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="Price Chart">
+                  <LineChart fx:id="priceChart" layoutX="17.0" layoutY="37.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="Price Chart">
             
                                                   <xAxis>
                       <NumberAxis side="BOTTOM" />
