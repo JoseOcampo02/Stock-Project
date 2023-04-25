@@ -118,7 +118,8 @@ public class SampleController implements Initializable {
 		}
 		realData = history.getClosingPrices();
 	
-     
+     /////////////////
+		//EMA longTrend = new EMA(200, realData);
      
 	    
 	    //create MACD object
@@ -130,6 +131,11 @@ public class SampleController implements Initializable {
 	    int offsetHistogram = realData.size() - myMACD.getHistogram().size();
 	    
 	    
+	    ///////////////experimental offset
+	    
+	    //int offsetEMAline = realData.size() - longTrend.getEmaList().size();
+	    
+	    
 	    // structure for line chart (individual line)  
 	    Series<Number, Number> priceLine = new XYChart.Series<>();
 	    priceLine.setName("Price");
@@ -137,11 +143,21 @@ public class SampleController implements Initializable {
 	    	priceLine.getData().add(new Data<Number, Number>(i + 1, realData.get(i)));
 	    }
 	    
-	    Series<Number, Number> histogramLine = new XYChart.Series<>();
-	    histogramLine.setName("Histogram");
+	    ///////////this mf right here
+	    /*
+	    Series<Number, Number> longTrendLine = new XYChart.Series<>();
+	    longTrendLine.setName("Long Trend Line");
 	    
-	    for (int i = 0; i < myMACD.getHistogram().size(); i++) {
-	    	histogramLine.getData().add(new Data<Number, Number>(i + 1 + offsetHistogram, myMACD.getHistogram().get(i)));
+	    for (int i = 0; i < longTrend.getEmaList().size(); i++) {
+	    	longTrendLine.getData().add(new Data<Number, Number>(i + 1 , longTrend.getEmaList().get(i)));
+	    }
+	     * */
+	
+	    
+	    Series<Number, Number> macdline = new XYChart.Series<>();
+	    macdline.setName("MACD Line");
+	    for (int i = 0; i < myMACD.getMACDline().size(); i++) {
+	    	macdline.getData().add(new Data<Number, Number>(i + 1 + offsetMACDLine, myMACD.getMACDline().get(i)));
 	    }
 	    
 	    Series<Number, Number> signalLine = new XYChart.Series<>();
@@ -150,14 +166,13 @@ public class SampleController implements Initializable {
 	    	signalLine.getData().add(new Data<Number, Number>(i + 1 + offsetSignalLine, myMACD.getSignalLine().get(i)));
 	    }
 	    
-	    Series<Number, Number> macdline = new XYChart.Series<>();
-	    macdline.setName("MACD Line");
-	    for (int i = 0; i < myMACD.getMACDline().size(); i++) {
-	    	macdline.getData().add(new Data<Number, Number>(i + 1 + offsetMACDLine, myMACD.getMACDline().get(i)));
+	    
+	    Series<Number, Number> histogramLine = new XYChart.Series<>();
+	    histogramLine.setName("Histogram");
+	    
+	    for (int i = 0; i < myMACD.getHistogram().size(); i++) {
+	    	histogramLine.getData().add(new Data<Number, Number>(i + 1 + offsetHistogram, myMACD.getHistogram().get(i)));
 	    }
-	    
-	    
-	    
 	    
 	    
 	    // adds lines to lineChart
@@ -170,6 +185,7 @@ public class SampleController implements Initializable {
 	    
 	    //adds price line to priceChart
 	    priceChart.getData().add(priceLine);
+	    //priceChart.getData().add(longTrendLine);
 
 	   
 	   // Adds mouseMoved event to priceChart
@@ -201,6 +217,8 @@ public class SampleController implements Initializable {
      * @param event The MouseEvent containing information about the mouse event.
      * @author Christian Jaime
      */
+	
+	//X axis location is a little off(by like 2) for the MACD chart 
 	private void handleMouseMove(LineChart<Number, Number> chart, MouseEvent event) {
 	    if (tooltip == null) {
 	        tooltip = new Tooltip();
@@ -211,11 +229,11 @@ public class SampleController implements Initializable {
 
 	    // Calculate X axis value based on mouse position
 	    NumberAxis xAxis = (NumberAxis) chart.getXAxis();
-	    double xValue = xAxis.getValueForDisplay(mouseX).doubleValue();
+	    double xValue = xAxis.getValueForDisplay(mouseX).doubleValue() - 10;
 
 	    // Create a StringBuilder to build the tooltip text
-	    StringBuilder tooltipText = new StringBuilder("X: " + String.format("%.2f", xValue) + "\n");
-
+	    StringBuilder tooltipText = new StringBuilder("Mouse Position X: " + String.format("%.2f", xValue) + "\n");
+	    //StringBuilder tooltipText = new StringBuilder();
 	    // Loop through all Series in the chart
 	    for (XYChart.Series<Number, Number> series : chart.getData()) {
 	        // Find the closest data point to the current X-axis value
@@ -223,6 +241,7 @@ public class SampleController implements Initializable {
 	        double minDistance = Double.MAX_VALUE;
 	        for (Data<Number, Number> data : series.getData()) {
 	            double dataXValue = data.getXValue().doubleValue();
+	            
 	            double distance = Math.abs(dataXValue - xValue);
 	            if (distance < minDistance) {
 	                minDistance = distance;
@@ -232,15 +251,20 @@ public class SampleController implements Initializable {
 
 	        // Append the data point to the tooltip text
 	        if (closestDataPoint != null) {
-	            tooltipText.append(series.getName() + ": Y(" + String.format("%.2f", closestDataPoint.getYValue().doubleValue()) + ")\n");
+	            tooltipText.append(series.getName() + ": Closest index X(" + String.format("%.2f", closestDataPoint.getXValue().doubleValue()) + ")  Y Values (" + String.format("%.2f", closestDataPoint.getYValue().doubleValue()) + ")\n");
 	        }
 	    }
+	        
+	        
+	        
 
 	    // Set the tooltip text and show it
 	    tooltip.setText(tooltipText.toString());
 	    Node node = (Node) event.getSource();
 	    Point2D point = node.localToScene(mouseX, mouseY);
 	    tooltip.show(node, point.getX() + node.getScene().getWindow().getX() + 15, point.getY() + node.getScene().getWindow().getY() + 15);
+	   
+	    
 	}
 
 	

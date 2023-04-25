@@ -12,8 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SampleController">
    <left>
       <VBox prefHeight="478.0" prefWidth="147.0" style="-fx-background-color: #5692db;" BorderPane.alignment="CENTER">
@@ -88,9 +86,9 @@
 <center>
     <BorderPane prefHeight="538.0" prefWidth="848.0" style="-fx-background-color: #5997e3;" BorderPane.alignment="CENTER">
          <left>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="200.0" prefWidth="635.0" BorderPane.alignment="CENTER">
                <children>
-                  <LineChart fx:id="lineChart" layoutX="35.0" layoutY="507.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="MACD">
+                  <LineChart fx:id="lineChart" layoutX="24.0" layoutY="440.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="MACD">
             
                                       <xAxis>
                       <NumberAxis side="BOTTOM" />

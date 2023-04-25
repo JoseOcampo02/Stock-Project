@@ -42,6 +42,30 @@ import yahoofinance.histquotes.Interval;
  */
 
 public class MACDandEMA {
+	public static void findInstances(List<Double> macdLine, List<Double> signalLine, List<Double> histogram) {
+	    int minSize = Math.min(Math.min(macdLine.size(), signalLine.size()), histogram.size());
+
+	    //GOTTA SHIFT THE INDEXES SO THEY LINE UP
+	    for (int i = 0; i < minSize; i++) {
+	        double currentMacd = macdLine.get(i);
+	        double currentSignal = signalLine.get(i);
+	        double currentHistogram = histogram.get(i);
+
+	        // Check for MACD > Signal Line and negative histogram
+	        if (currentMacd > currentSignal && currentHistogram < 0) {
+	            System.out.println("Instance found at index: " + i);
+	            // Additional logic can be added here for handling instances
+	        }
+	    }
+	}
+
+
+
+
+
+
+
+
 
 	public static void main(String[] args) throws IOException {
 		
@@ -49,11 +73,25 @@ public class MACDandEMA {
         DataCollection history =  new DataCollection("AAPL", 190);
   
         MACD myMACD = new MACD(history.getClosingPrices(), 12, 26, 9);
-        myMACD.printResults();
         
-  
+        System.out.println("Data Points " + history.getClosingPrices().size());
+        //myMACD.printResults();
+        
+        
+        //EMA longTrendPP = new EMA(200, history.getClosingPrices());
+        //longTrendPP.printEma();
+        //System.out.println(longTrendPP.getEmaList().size());
+        
+        findInstances(myMACD.getMACDline(), myMACD.getSignalLine(), myMACD.getHistogram());
+
+        
+
     }
 
+	
+	
+
+	
 }
 
 class MACD {
@@ -226,6 +264,8 @@ class EMA {
 
         return emaValues;
     }
+    
+    
     
     /**
      * Prints the EMA values.
