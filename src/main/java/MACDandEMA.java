@@ -42,27 +42,34 @@ import yahoofinance.histquotes.Interval;
  */
 
 public class MACDandEMA {
-	public static void findInstances(List<Double> macdLine, List<Double> signalLine, List<Double> histogram) {
-	    int minSize = Math.min(Math.min(macdLine.size(), signalLine.size()), histogram.size());
+	
+	
+/*
+    private static List<Integer> findInstances(List<Double> macd, List<Double> signal, List<Double> close) {
+        // Start at index 8 to account for the 9-day EMA offset
+        int offset = 8;
+        List<Integer> buySignalIndices = new ArrayList<>();
 
-	    //GOTTA SHIFT THE INDEXES SO THEY LINE UP
-	    for (int i = 0; i < minSize; i++) {
-	        double currentMacd = macdLine.get(i);
-	        double currentSignal = signalLine.get(i);
-	        double currentHistogram = histogram.get(i);
+        for (int i = 8; i < macd.size() - 1; i++) {
+            double currentMacd = macd.get(i);
+            double currentSignal = signal.get(i - offset);
 
-	        // Check for MACD > Signal Line and negative histogram
-	        if (currentMacd > currentSignal && currentHistogram < 0) {
-	            System.out.println("Instance found at index: " + i);
-	            // Additional logic can be added here for handling instances
-	        }
-	    }
-	}
+            // Check for MACD line above Signal Line, both lines below zero line (negative numbers)
+            if (currentMacd > currentSignal && currentMacd < 0 && currentSignal < 0) {
+                buySignalIndices.add(i - offset);
+            }
 
+            // If you want to check for sell signals when the MACD line is below the Signal line and both lines are above the Zero line, you can add the following condition:
+            // Check for MACD line below Signal Line, both lines above zero line (positive numbers)
+            // if (currentMacd < currentSignal && currentMacd > 0 && currentSignal > 0) {
+            //     System.out.println("Sell signal at index: " + indexWithOffset + " with price: " + close.get(i));
+            // }
+        }
+        return buySignalIndices;
+    }
 
-
-
-
+	
+*/
 
 
 
@@ -75,14 +82,15 @@ public class MACDandEMA {
         MACD myMACD = new MACD(history.getClosingPrices(), 12, 26, 9);
         
         System.out.println("Data Points " + history.getClosingPrices().size());
-        //myMACD.printResults();
+        //System.out.println("Data Points " + history.getClosingPrices());
+        myMACD.printResults();
         
         
         //EMA longTrendPP = new EMA(200, history.getClosingPrices());
         //longTrendPP.printEma();
         //System.out.println(longTrendPP.getEmaList().size());
         
-        findInstances(myMACD.getMACDline(), myMACD.getSignalLine(), myMACD.getHistogram());
+        //System.out.println( findInstances(myMACD.getMACDline(), myMACD.getSignalLine(), history.getClosingPrices()));
 
         
 

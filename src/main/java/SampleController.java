@@ -99,7 +99,28 @@ public class SampleController implements Initializable {
     }
     
     
-   
+    private static List<Integer> findInstances(List<Double> macd, List<Double> signal, List<Double> close) {
+        // Start at index 8 to account for the 9-day EMA offset
+        int offset = 8;
+        List<Integer> buySignalIndices = new ArrayList<>();
+        //maybe dont need -1!!
+        for (int i = 8; i < macd.size() - 1; i++) {
+            double currentMacd = macd.get(i);
+            double currentSignal = signal.get(i - offset);
+
+            // Check for MACD line above Signal Line, both lines below zero line (negative numbers)
+            if (currentMacd > currentSignal && currentMacd < 0 && currentSignal < 0) {
+                buySignalIndices.add(i - offset);
+            }
+
+        
+            // Check for MACD line below Signal Line, both lines above zero line (positive numbers)
+            // if (currentMacd < currentSignal && currentMacd > 0 && currentSignal > 0) {
+            //     System.out.println("Sell signal at index: " + indexWithOffset + " with price: " + close.get(i));
+            // }
+        }
+        return buySignalIndices;
+    }
   
     
     /**
@@ -113,7 +134,7 @@ public class SampleController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		
-		/*
+		
 	    
 		//collects data from yahooFinace
 		List<Double> realData = new ArrayList<Double>();
@@ -127,14 +148,8 @@ public class SampleController implements Initializable {
 		}
 		realData = history.getClosingPrices();
 	
-<<<<<<< HEAD
-		//TSLAPrice.setText(realData);
-=======
-     /////////////////
-		//EMA longTrend = new EMA(200, realData);
->>>>>>> branch 'master' of https://github.com/JoseOcampo02/Stock-Project.git
-     
-	    
+		
+
 	    //create MACD object
 	    MACD myMACD = new MACD(realData, 12, 26, 9);
 	    
@@ -143,11 +158,15 @@ public class SampleController implements Initializable {
 	    int offsetMACDLine = realData.size() - myMACD.getMACDline().size();
 	    int offsetHistogram = realData.size() - myMACD.getHistogram().size();
 	    
+	    //trying to display instances correctly still off
+	    List<Integer> buySignalIndices = findInstances(myMACD.getMACDline(), myMACD.getSignalLine(), realData);
 	    
-	    ///////////////experimental offset
+	    //for (int i = 0; i < buySignalIndices.size(); i++) {
+	    //	buySignalIndices.set(i, myMACD.getMACDline().size() - buySignalIndices.get(i));
+	    //}
+	    plotBuySignalIndices(lineChart, buySignalIndices, offsetSignalLine);
 	    
-	    //int offsetEMAline = realData.size() - longTrend.getEmaList().size();
-	    
+
 	    
 	    // structure for line chart (individual line)  
 	    Series<Number, Number> priceLine = new XYChart.Series<>();
@@ -155,18 +174,9 @@ public class SampleController implements Initializable {
 	    for (int i = 0; i < realData.size(); i++) {
 	    	priceLine.getData().add(new Data<Number, Number>(i + 1, realData.get(i)));
 	    }
-	    
-	    ///////////this mf right here
-	    /*
-	    Series<Number, Number> longTrendLine = new XYChart.Series<>();
-	    longTrendLine.setName("Long Trend Line");
-	    
-	    for (int i = 0; i < longTrend.getEmaList().size(); i++) {
-	    	longTrendLine.getData().add(new Data<Number, Number>(i + 1 , longTrend.getEmaList().get(i)));
-	    }
-	     * */
+	   
 	
-	    /*
+	    
 	    Series<Number, Number> macdline = new XYChart.Series<>();
 	    macdline.setName("MACD Line");
 	    for (int i = 0; i < myMACD.getMACDline().size(); i++) {
@@ -191,7 +201,7 @@ public class SampleController implements Initializable {
 	    // adds lines to lineChart
 	    lineChart.getData().add(macdline);
 	    lineChart.getData().add(signalLine);
-	    lineChart.getData().add(histogramLine);
+	    //lineChart.getData().add(histogramLine);
 	    
 	    
 	    
@@ -211,15 +221,30 @@ public class SampleController implements Initializable {
 	        handleMouseMove(lineChart, event);
 	    });
 
-        */
-		//*/
+        
+	
 	    
 	}
 	
 	
 	
 	
-	
+	private void plotBuySignalIndices(LineChart<Number, Number> chart, List<Integer> indices, int slOffset) {
+	    int i = 0;
+	    //int offsetSL 
+		for (Integer index : indices) {
+	        XYChart.Series<Number, Number> buySignalSeries = new XYChart.Series<>();
+	        buySignalSeries.setName("Buy Signal at " + (index + slOffset));
+
+	        // Add two data points to create a vertical line
+	        buySignalSeries.getData().add(new Data<Number, Number>(indices.get(i) + slOffset, 0));
+	   
+
+	        chart.getData().add(buySignalSeries);
+	        i++;
+	    }
+	}
+
 	
 	
 	
