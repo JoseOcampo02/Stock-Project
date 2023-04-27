@@ -3,27 +3,79 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SampleController">
    <left>
-      <VBox prefHeight="478.0" prefWidth="50.0" style="-fx-background-color: #2f68ad;" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="478.0" prefWidth="147.0" style="-fx-background-color: #5692db;" BorderPane.alignment="CENTER">
+         <children>
+            <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToProfileView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Profile" textFill="WHITE">
+               <graphic>
+                  <ImageView id="profile_icon" fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@profile.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Account Summary" textFill="WHITE">
+               <font>
+                  <Font size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView id="account_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@investments.png" />
+                     </image></ImageView>
+               </graphic>
+            </Button>
+            <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToInvestmentsView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Investments" textFill="WHITE">
+               <graphic>
+                  <ImageView id="investments_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@money%20icon.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Market" textFill="WHITE">
+               <graphic>
+                  <ImageView id="market_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@market.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToAnalysisView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Analysis" textFill="WHITE">
+               <graphic>
+                  <ImageView id="analysis_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@statistics.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToChartsView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Charts" textFill="WHITE">
+               <graphic>
+                  <ImageView id="charts_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@chart.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Reports" textFill="WHITE">
+               <graphic>
+                  <ImageView id="reports_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@reports.png" />
+                     </image></ImageView>
+               </graphic></Button>
+         </children>
+      </VBox>
    </left>
    <top>
-      <HBox prefHeight="79.0" prefWidth="1600.0" style="-fx-background-color: #2f68ad;" BorderPane.alignment="CENTER">
+      <HBox prefHeight="54.0" prefWidth="875.0" style="-fx-background-color: #2f68ad;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView id="logo" fitHeight="86.0" fitWidth="298.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="logo" fitHeight="53.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@wallstreetbits_logo.png" />
                </image>
@@ -34,9 +86,9 @@
 <center>
     <BorderPane prefHeight="538.0" prefWidth="848.0" style="-fx-background-color: #5997e3;" BorderPane.alignment="CENTER">
          <left>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="200.0" prefWidth="635.0" BorderPane.alignment="CENTER">
                <children>
-                  <LineChart fx:id="lineChart" layoutX="24.0" layoutY="399.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="MACD">
+                  <LineChart fx:id="lineChart" layoutX="24.0" layoutY="440.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="MACD">
             
                                       <xAxis>
                       <NumberAxis side="BOTTOM" />
@@ -48,7 +100,7 @@
                         <Cursor fx:constant="CROSSHAIR" />
                      </cursor>
                   </LineChart>
-                  <LineChart fx:id="priceChart" alternativeColumnFillVisible="true" layoutX="24.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="Price Chart">
+                  <LineChart fx:id="priceChart" layoutX="17.0" layoutY="37.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="655.0" title="Price Chart">
             
                                                   <xAxis>
                       <NumberAxis side="BOTTOM" />
@@ -63,38 +115,6 @@
                </children>
             </AnchorPane>
          </left>
-         <right>
-            <AnchorPane prefHeight="1146.0" prefWidth="737.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label layoutX="-34.0" layoutY="50.0" prefHeight="44.0" prefWidth="143.0" text="TSLA" textAlignment="CENTER">
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                     <textFill>
-                        <LinearGradient endY="0.05463182897862234" startX="0.9643705463182898" startY="0.8598574821852731">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="1.0" green="1.0" blue="1.0" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="1.0" green="1.0" blue="1.0" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
-                  </Label>
-                  <Label layoutX="77.0" layoutY="67.0" text="recent price" />
-                  <Label layoutX="-2.0" layoutY="569.0" prefHeight="87.0" prefWidth="224.0" text="Buy / Sell Indicator" />
-                  <TextArea layoutX="-34.0" layoutY="154.0" prefHeight="65.0" prefWidth="266.0" text="What else should we put on this side?&#10;&#10;" />
-                  <Label layoutX="-34.0" layoutY="264.0" prefHeight="60.0" prefWidth="287.0" text="Number of Shares Owned: ####" />
-                  <Label layoutX="-34.0" layoutY="381.0" prefHeight="46.0" prefWidth="262.0" text="Shares Worth: $$$$" />
-               </children>
-            </AnchorPane>
-         </right>
     </BorderPane>
 </center>
 </BorderPane>

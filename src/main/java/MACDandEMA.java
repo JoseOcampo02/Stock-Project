@@ -15,7 +15,84 @@ import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
+/**
+ * MACDandEMA.java
+ * Date: April 18, 2023
+ *
+ * This class consists of the main method to calculate MACD (Moving Average Convergence Divergence) and EMA (Exponential Moving Average) 
+ * for a given stock's historical data. It uses the YahooFinance API to fetch historical stock data. These classes are temporarily in the same .java file for 
+ * visibility since the macd class depends on ema.
+ *
+ * Classes:
+ * 1. MACD - Class to calculate the MACD line, signal line, and histogram.
+ * 2. EMA - Class to calculate the Exponential Moving Average (EMA) for a given set of prices.
+ * 3. DataCollection - Class to fetch historical stock data using the YahooFinance API.(There are currently two versions being developed one using arrays and the other lists. 
+ * The array implementation will be used for backlog testing and the list will be used for live collection)
+ *
+ * Algorithms:
+ * - EMA: Exponential Moving Average is used to calculate MACD. It gives more weight to recent prices and thus is more sensitive to recent price changes.
+ * An in depth exploration of the math behind the calculation can be found in the ema calculate function.
+ * 
+ *
+ * Data Structures:
+ * - ArrayList: Used for storing historical prices, EMA values, MACD values, and signal line values.
+ * 
+ * @version 1.0
+ * @author Christian Jaime
+ */
 
+public class MACDandEMA {
+	public static void findInstances(List<Double> macdLine, List<Double> signalLine, List<Double> histogram) {
+	    int minSize = Math.min(Math.min(macdLine.size(), signalLine.size()), histogram.size());
+
+	    //GOTTA SHIFT THE INDEXES SO THEY LINE UP
+	    for (int i = 0; i < minSize; i++) {
+	        double currentMacd = macdLine.get(i);
+	        double currentSignal = signalLine.get(i);
+	        double currentHistogram = histogram.get(i);
+
+	        // Check for MACD > Signal Line and negative histogram
+	        if (currentMacd > currentSignal && currentHistogram < 0) {
+	            System.out.println("Instance found at index: " + i);
+	            // Additional logic can be added here for handling instances
+	        }
+	    }
+	}
+
+
+
+
+
+
+
+
+
+	public static void main(String[] args) throws IOException {
+		
+		
+        DataCollection history =  new DataCollection("AAPL", 190);
+  
+        MACD myMACD = new MACD(history.getClosingPrices(), 12, 26, 9);
+        
+        System.out.println("Data Points " + history.getClosingPrices().size());
+        //myMACD.printResults();
+        
+        
+        //EMA longTrendPP = new EMA(200, history.getClosingPrices());
+        //longTrendPP.printEma();
+        //System.out.println(longTrendPP.getEmaList().size());
+        
+        findInstances(myMACD.getMACDline(), myMACD.getSignalLine(), myMACD.getHistogram());
+
+        
+
+    }
+
+	
+	
+
+	
+}
 
 class MACD {
     private List<Double> closingPrices;
@@ -29,6 +106,15 @@ class MACD {
     private List<Double> signalLine;
     private List<Double> histogram;
 
+    /**
+     * Constructs a new MACD object with the given closing prices and periods.
+     *
+     * @param closingPrices the list of closing prices for a stock
+     * @param shortPeriod   the short period for EMA calculation
+     * @param longPeriod    the long period for EMA calculation
+     * @param signalPeriod  the signal period for EMA calculation
+     */
+    
     public MACD(List<Double> closingPrices, int shortPeriod, int longPeriod, int signalPeriod) {
         this.closingPrices = closingPrices;
         this.shortPeriod = shortPeriod;
@@ -37,6 +123,10 @@ class MACD {
         calculateMACD();
     }
 
+    
+    /**
+     * Calculates the MACD line, signal line, and histogram.
+     */
     public void calculateMACD() {
         shortEma = new EMA(shortPeriod, closingPrices);
         longEma = new EMA(longPeriod, closingPrices);
@@ -67,6 +157,9 @@ class MACD {
 
     }
 
+    /**
+     * Prints the results including short-term EMA, long-term EMA, MACD line, MACD signal line, and histogram.
+     */
     public void printResults() {
     	
         System.out.println("\nSize: " + shortEma.getEmaList().size());
@@ -101,15 +194,23 @@ class MACD {
     }
     
     
-    
+    /**
+     * @return the macdLine list
+     */
     public List<Double> getMACDline() {
 		return macdLine;
 	}
     
+    /**
+     * @return the signalLine list
+     */
     public List<Double> getSignalLine() {
 		return signalLine;
 	}
     
+    /**
+     * @return the histogram list
+     */
     public List<Double> getHistogram() {
 		return histogram;
 	}
@@ -121,14 +222,27 @@ class EMA {
     private final int period;
     private final List<Double> emaList;
     
-    
+    /**
+     * Constructs a new EMA object with the given period and closing prices.
+     *
+     * @param period           the period for EMA calculation
+     * @param closingPricesArg the list of closing prices for a stock
+     */
     public EMA(int period, List<Double> closingPricesArg) {
         this.period = period;
         this.emaList = calculate(closingPricesArg);
     }
 
+    
+    /**
+     * Calculates the Exponential Moving Average for a given set of prices.
+     *
+     * @param prices the list of closing prices for a stock
+     * @return a list of EMA values
+     */
     public List<Double> calculate(List<Double> prices) {
         List<Double> emaValues = new ArrayList<Double>();
+        
         double multiplier = 2.0 / (period + 1);
 
         // initial SMA
@@ -143,7 +257,6 @@ class EMA {
 
         // remaining EMA values
         for (int i = period; i < prices.size(); i++) {
-            //double ema = (prices.get(i) - emaValues.get(i - period)) * multiplier + emaValues.get(i - period);
         	double ema = (prices.get(i) - emaValues.get(emaValues.size() - 1)) * multiplier + emaValues.get(emaValues.size() - 1);
 
         	emaValues.add(ema);
@@ -153,6 +266,10 @@ class EMA {
     }
     
     
+    
+    /**
+     * Prints the EMA values.
+     */
     public void printEma() {
     	System.out.println("\nSize: " + this.getEmaList().size());
         System.out.println("EMA values: ");
@@ -161,6 +278,9 @@ class EMA {
         }
     }
 
+    /**
+     * @return a list of the calculated ema
+     */
 	public List<Double> getEmaList() {
 		return emaList;
 	}
@@ -168,7 +288,13 @@ class EMA {
 }
 
 
-
+/**
+ * Constructs a new DataCollection object with the given ticker and number of days back.
+ *
+ * @param ticker the stock's ticker symbol
+ * @param daysBack the number of days back to fetch historical data
+ * @throws IOException if there is an error fetching the data
+ */
 class DataCollection {
     private String ticker;
     private int daysBack;
@@ -180,6 +306,13 @@ class DataCollection {
         collectData();
     }
 
+    
+    
+    /**
+     * Collects historical data using the YahooFinance API.
+     *
+     * @throws IOException if there is an issue fetching the data
+     */
     private void collectData() throws IOException {
         Calendar from = Calendar.getInstance();
         from.add(Calendar.DAY_OF_MONTH, -daysBack);
@@ -193,22 +326,39 @@ class DataCollection {
         }
     }
 
+
+    /**
+     * @return the ticker symbol in string
+     */
     public String getTicker() {
         return ticker;
     }
 
+    /**
+     * @return the int of how many days back in time.
+     */
     public int getDaysBack() {
         return daysBack;
     }
 
+    /**
+     * @return the list closing prices
+     */
     public List<Double> getClosingPrices() {
         return closingPrices;
     }
 
+    /**
+     * @return the int amount of market days and or size
+     */
     public int getMarketDays() {
         return closingPrices.size();
     }
     
+    
+    /**
+     * Prints the closing prices.
+     */
     public void printClosingPrices() {
         int i = 0;
         for (double price : closingPrices) {
@@ -216,27 +366,4 @@ class DataCollection {
             i++;
         }
     }
-}
-
-
-
-public class MACDandEMA {
-
-	public static void main(String[] args) throws IOException {
-		
-		
-  
-		List<Double> hellaSwag = new ArrayList<Double>();
-        DataCollection history =  new DataCollection("AAPL", 120);
-		
-        hellaSwag = history.getClosingPrices();
-     
-        
-  
-        MACD myMACD = new MACD(hellaSwag, 12, 26, 9);
-        myMACD.printResults();
-        
-  
-    }
-
 }
