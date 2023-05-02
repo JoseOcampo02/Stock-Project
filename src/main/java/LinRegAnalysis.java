@@ -45,6 +45,8 @@ public class LinRegAnalysis {
      */
     private BigDecimal ThreeDay;
     
+    private BigDecimal[] myData;
+    
     /**
      * 
      * Constructs LinRegAnalysis object that automatically performs
@@ -53,14 +55,16 @@ public class LinRegAnalysis {
      * @throws IOException Throws IOException
      * 
      */
-    public LinRegAnalysis(Stock myStock) throws IOException {   // Creating a LinRegAnalysis object will automatically
+    public LinRegAnalysis(Stock myStock, BigDecimal[] myData) throws IOException {   // Creating a LinRegAnalysis object will automatically
                                                                 // perform the necessary calculations for a 1, 2, or 3
                                                                 // day prediction into the future for a given stock
                                                                 // These are saved into private variables with getters
         
-        BigDecimal[] input = getStockData(myStock);             // Requests and cleans up data for calculations
-        getSlopeAndYInt(input);
-        CalcPredictions(input.length); 
+        //this.myData = getStockData(myStock);             // Requests and cleans up data for calculations
+        this.myData = myData;
+        
+        getSlopeAndYInt(myData);
+        CalcPredictions(myData.length); 
         
     }
     
@@ -103,6 +107,24 @@ public class LinRegAnalysis {
     public BigDecimal getThreeDay() {
         
         return this.ThreeDay;
+        
+    }
+    
+    public BigDecimal[] getMyData() {
+        
+        return this.myData;
+        
+    }
+    
+    public double getYInt() {
+        
+        return this.yInt;
+        
+    }
+    
+    public double getSlope() {
+        
+        return this.slope;
         
     }
     

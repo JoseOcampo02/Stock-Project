@@ -134,7 +134,7 @@ public class SampleController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		
-		
+		/*
 	    
 		//collects data from yahooFinace
 		List<Double> realData = new ArrayList<Double>();
@@ -222,7 +222,7 @@ public class SampleController implements Initializable {
 	    });
 
         
-	
+	*/
 	    
 	}
 	
