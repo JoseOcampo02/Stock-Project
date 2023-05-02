@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SampleController">
    <left>
@@ -23,29 +22,11 @@
                         <Image url="@profile.png" />
                      </image></ImageView>
                </graphic></Button>
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Account Summary" textFill="WHITE">
-               <font>
-                  <Font size="12.0" />
-               </font>
-               <graphic>
-                  <ImageView id="account_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@investments.png" />
-                     </image></ImageView>
-               </graphic>
-            </Button>
             <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToInvestmentsView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Investments" textFill="WHITE">
                <graphic>
                   <ImageView id="investments_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@money%20icon.png" />
-                     </image></ImageView>
-               </graphic></Button>
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Market" textFill="WHITE">
-               <graphic>
-                  <ImageView id="market_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@market.png" />
                      </image></ImageView>
                </graphic></Button>
             <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToAnalysisView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Analysis" textFill="WHITE">
@@ -60,13 +41,6 @@
                   <ImageView id="charts_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@chart.png" />
-                     </image></ImageView>
-               </graphic></Button>
-            <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Reports" textFill="WHITE">
-               <graphic>
-                  <ImageView id="reports_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@reports.png" />
                      </image></ImageView>
                </graphic></Button>
          </children>
