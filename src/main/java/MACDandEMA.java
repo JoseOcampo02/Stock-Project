@@ -42,34 +42,6 @@ import yahoofinance.histquotes.Interval;
  */
 
 public class MACDandEMA {
-	
-	
-/*
-    private static List<Integer> findInstances(List<Double> macd, List<Double> signal, List<Double> close) {
-        // Start at index 8 to account for the 9-day EMA offset
-        int offset = 8;
-        List<Integer> buySignalIndices = new ArrayList<>();
-
-        for (int i = 8; i < macd.size() - 1; i++) {
-            double currentMacd = macd.get(i);
-            double currentSignal = signal.get(i - offset);
-
-            // Check for MACD line above Signal Line, both lines below zero line (negative numbers)
-            if (currentMacd > currentSignal && currentMacd < 0 && currentSignal < 0) {
-                buySignalIndices.add(i - offset);
-            }
-
-            // If you want to check for sell signals when the MACD line is below the Signal line and both lines are above the Zero line, you can add the following condition:
-            // Check for MACD line below Signal Line, both lines above zero line (positive numbers)
-            // if (currentMacd < currentSignal && currentMacd > 0 && currentSignal > 0) {
-            //     System.out.println("Sell signal at index: " + indexWithOffset + " with price: " + close.get(i));
-            // }
-        }
-        return buySignalIndices;
-    }
-
-	
-*/
 
 
 
@@ -77,20 +49,30 @@ public class MACDandEMA {
 	public static void main(String[] args) throws IOException {
 		
 		
-        DataCollection history =  new DataCollection("AAPL", 190);
+        //DataCollection history =  new DataCollection("AAPL", 190);
+		
+		List<Double> history = Arrays.asList(
+		148.875351, 144.339813, 155.245056, 152.852661, 150.171204, 144.569077, 138.438629, 138.169037, 138.708206, 139.287338, 134.664383, 146.646088, 149.471771, 148.05394, 149.811249, 148.563156, 150.490234, 
+		 151.059357, 147.784348, 149.951035, 150.839706, 147.884201, 144.000137, 140.954788, 147.804321, 148.083893, 147.584656, 146.406464, 142.692139, 140.725143, 142.432526, 141.943283, 144.26973, 145.24823, 
+		 142.991684, 136.291901, 134.304932, 132.168198, 132.098312, 135.2435, 132.028412, 131.658981, 129.831772, 125.847855, 129.412415, 129.731918, 124.879326, 126.167366, 124.829399, 129.422394, 129.951584, 
+		 130.530701, 133.286499, 133.206619, 134.55455, 135.732758, 135.003876, 135.063782, 137.659805, 140.894882, 142.312714, 141.643738, 143.74054, 145.70752, 142.781998, 144.070023, 145.208282, 150.590088, 
+		 154.264465, 151.498688, 154.41423, 151.6884, 150.639999, 151.009995, 153.850006, 153.199997, 155.330002, 153.710007, 152.550003, 148.479996, 148.910004, 149.399994, 146.710007, 147.919998, 147.410004, 
+		 145.309998, 145.910004, 151.029999, 153.830002, 151.600006, 152.869995, 150.589996, 148.5, 150.470001, 152.589996, 152.990005, 155.850006, 155.0, 157.399994, 159.279999, 157.830002, 158.929993, 160.25, 
+		 158.279999, 157.649994, 160.770004, 162.360001, 164.899994, 166.169998, 165.630005, 163.759995, 164.660004, 162.029999, 160.800003, 160.100006, 165.559998, 165.210007, 165.229996, 166.470001, 167.630005, 
+		 166.649994, 165.020004, 165.330002, 163.770004, 163.759995, 168.410004, 169.679993, 169.589996, 168.539993, 167.449997);
   
-        MACD myMACD = new MACD(history.getClosingPrices(), 12, 26, 9);
+        MACD myMACD = new MACD(history, 12, 26, 9);
         
-        System.out.println("Data Points " + history.getClosingPrices().size());
+
+        
+        
         //System.out.println("Data Points " + history.getClosingPrices());
-        myMACD.printResults();
-        
-        
-        //EMA longTrendPP = new EMA(200, history.getClosingPrices());
+        //myMACD.printResults();
+
+        //EMA longTrendPP = new EMA(5, testPrices);
         //longTrendPP.printEma();
-        //System.out.println(longTrendPP.getEmaList().size());
-        
-        //System.out.println( findInstances(myMACD.getMACDline(), myMACD.getSignalLine(), history.getClosingPrices()));
+   
+        System.out.println( myMACD.findInstances());
 
         
 
@@ -224,6 +206,54 @@ class MACD {
 	}
     
     
+    
+
+    public List<Integer> findInstances() {
+        // Start at index 8 to account for the 9-day EMA offset. makes scense since day 9 is on index 8(0-8) and with 9 days we have our first ema value
+        int offset = this.signalPeriod - 1;
+        List<Integer> buySignalIndices = new ArrayList<>();
+        
+        
+        //maybe dont need -1!! yea i dont see y either
+        for (int i = offset; i < this.macdLine.size() - 0; i++) {
+            double currentMacd = this.macdLine.get(i);
+            double currentSignal = this.signalLine.get(i - offset);
+
+            // Check for MACD line above Signal Line, both lines below zero line (negative numbers)
+            if (currentMacd > currentSignal && currentMacd < 0 && currentSignal < 0) {
+                buySignalIndices.add(i - offset);
+            }
+
+        
+            // Check for MACD line cross below Signal Line while both lines above zero line 
+            // if (currentMacd < currentSignal && currentMacd > 0 && currentSignal > 0) {
+            //     System.out.println("Sell signal at index: " + indexWithOffset + " with price: " + close.get(i));
+            // }
+        }
+        return buySignalIndices;
+    }
+
+
+	public Integer getShortPeriod() {
+
+		return this.shortPeriod;
+	}
+
+
+	public Integer getLongPeriod() {
+		
+		return this.longPeriod;
+	}
+
+
+	public Integer getSignalPeriod() {
+
+		return this.signalPeriod;
+	}
+    
+    
+
+    
 }
 
 class EMA {
@@ -292,6 +322,15 @@ class EMA {
 	public List<Double> getEmaList() {
 		return emaList;
 	}
+
+
+	public Integer getPeriod() {
+		
+		return period;
+	}
+	
+	
+	
     
 }
 

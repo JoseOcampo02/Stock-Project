@@ -81,7 +81,7 @@ public class SampleController implements Initializable {
     @FXML
     private Label TSLAPrice;
     
-    /**
+    /*
       
       @author Alonzo Garcia
       This allows the images to be seen by the user.
@@ -99,28 +99,7 @@ public class SampleController implements Initializable {
     }
     
     
-    private static List<Integer> findInstances(List<Double> macd, List<Double> signal, List<Double> close) {
-        // Start at index 8 to account for the 9-day EMA offset
-        int offset = 8;
-        List<Integer> buySignalIndices = new ArrayList<>();
-        //maybe dont need -1!!
-        for (int i = 8; i < macd.size() - 1; i++) {
-            double currentMacd = macd.get(i);
-            double currentSignal = signal.get(i - offset);
 
-            // Check for MACD line above Signal Line, both lines below zero line (negative numbers)
-            if (currentMacd > currentSignal && currentMacd < 0 && currentSignal < 0) {
-                buySignalIndices.add(i - offset);
-            }
-
-        
-            // Check for MACD line below Signal Line, both lines above zero line (positive numbers)
-            // if (currentMacd < currentSignal && currentMacd > 0 && currentSignal > 0) {
-            //     System.out.println("Sell signal at index: " + indexWithOffset + " with price: " + close.get(i));
-            // }
-        }
-        return buySignalIndices;
-    }
   
     
     /**
@@ -134,7 +113,7 @@ public class SampleController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		
-		/*
+		///*
 	    
 		//collects data from yahooFinace
 		List<Double> realData = new ArrayList<Double>();
@@ -157,14 +136,16 @@ public class SampleController implements Initializable {
 	    int offsetSignalLine = realData.size() - myMACD.getSignalLine().size();
 	    int offsetMACDLine = realData.size() - myMACD.getMACDline().size();
 	    int offsetHistogram = realData.size() - myMACD.getHistogram().size();
+	   
+	   
 	    
-	    //trying to display instances correctly still off
-	    List<Integer> buySignalIndices = findInstances(myMACD.getMACDline(), myMACD.getSignalLine(), realData);
 	    
-	    //for (int i = 0; i < buySignalIndices.size(); i++) {
-	    //	buySignalIndices.set(i, myMACD.getMACDline().size() - buySignalIndices.get(i));
-	    //}
-	    plotBuySignalIndices(lineChart, buySignalIndices, offsetSignalLine);
+	    //List<Integer> buySignalIndices = findInstances(myMACD.getMACDline(), myMACD.getSignalLine(), realData);
+	    List<Integer> buySignalIndices = myMACD.findInstances();
+	    plotBuySignalIndices(lineChart, buySignalIndices, offsetSignalLine); // buy signal offset is same as signal line offset
+	    
+	    
+	    
 	    
 
 	    
@@ -222,7 +203,7 @@ public class SampleController implements Initializable {
 	    });
 
         
-	*/
+	//*/
 	    
 	}
 	
