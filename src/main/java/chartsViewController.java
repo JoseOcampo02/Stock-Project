@@ -157,12 +157,12 @@ public class chartsViewController implements Initializable{
     
     public void generateLinRegChart(int stockSelection) throws IOException{
         
-        LinRegAnalysis myAnalysis = new LinRegAnalysis(stockArr[stockSelection], stockData[stockSelection]);
+        LinRegAnalysis myAnalysis = new LinRegAnalysis(stockData[stockSelection]);
         BigDecimal[] myData = stockData[stockSelection];
-        double leftEndPoint = myAnalysis.getSlope() * 0 + myAnalysis.getYInt();
-        double rightEndPoint = myAnalysis.getSlope() * (myData.length - 1) + myAnalysis.getYInt();
-        BigDecimal left = BigDecimal.valueOf(leftEndPoint).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal right = BigDecimal.valueOf(rightEndPoint).setScale(2, RoundingMode.HALF_UP);
+        
+        BigDecimal lastIndexAsBD = new BigDecimal(Integer.toString(stockData[stockSelection].length - 1));
+        BigDecimal left = myAnalysis.getYInt();
+        BigDecimal right = (myAnalysis.getSlope().multiply(lastIndexAsBD)).add(left);
         
         XYChart.Series<Number, Number> series1 = new XYChart.Series<>();
         series1.setName("Closing prices");
