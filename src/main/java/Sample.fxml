@@ -19,28 +19,28 @@
                <graphic>
                   <ImageView id="profile_icon" fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@profile.png" />
+                        <Image url="@images/profile.png" />
                      </image></ImageView>
                </graphic></Button>
             <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToInvestmentsView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Investments" textFill="WHITE">
                <graphic>
                   <ImageView id="investments_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@money%20icon.png" />
+                        <Image url="@images/money%20icon.png" />
                      </image></ImageView>
                </graphic></Button>
             <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToAnalysisView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Analysis" textFill="WHITE">
                <graphic>
                   <ImageView id="analysis_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@statistics.png" />
+                        <Image url="@images/statistics.png" />
                      </image></ImageView>
                </graphic></Button>
             <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeToChartsView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Charts" textFill="WHITE">
                <graphic>
                   <ImageView id="charts_icon" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@chart.png" />
+                        <Image url="@images/chart.png" />
                      </image></ImageView>
                </graphic></Button>
          </children>
@@ -51,7 +51,7 @@
          <children>
             <ImageView id="logo" fitHeight="53.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@wallstreetbits_logo.png" />
+                  <Image url="@images/wallstreetbits_logo.png" />
                </image>
             </ImageView>
          </children>
@@ -122,7 +122,7 @@
                         <Font size="15.0" />
                      </font>
                   </Hyperlink>
-                  <Text fill="WHITE" layoutX="13.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="News and resources" underline="true">
+                  <Text fill="WHITE" layoutX="32.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="News" underline="true">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
