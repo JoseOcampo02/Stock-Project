@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resourcesViewController">
+   <top>
+      <HBox prefHeight="60.0" prefWidth="1000.0" style="-fx-background-color: #2f68ad;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="63.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/wallstreetbits_logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #5997e3;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="550.0" prefWidth="1000.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="  Stock Analysis" underline="true" wrappingWidth="653.3367118835449">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Text>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="100.0" prefWidth="60.0" />
+                        <VBox prefHeight="100.0" prefWidth="843.0">
+                           <children>
+                              <Hyperlink onAction="#SAlinkOneClick" prefHeight="33.0" prefWidth="601.0" style="-fx-text-fill: #314059;" text="• How to Research Stocks (Motley Fool)">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Hyperlink>
+                              <Hyperlink layoutX="10.0" layoutY="10.0" onAction="#SAlinkTwoClick" prefHeight="38.0" prefWidth="788.0" style="-fx-text-fill: #314059;" text="• Technical Analysis: What It Is and How to Use It in Investing (Investopedia)">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Hyperlink>
+                              <Hyperlink layoutX="10.0" layoutY="48.0" onAction="#SAlinkThreeClick" prefHeight="38.0" prefWidth="654.0" style="-fx-text-fill: #314059;" text="• 7 Technical Indicators to Build a Trading Toolkit (Investopedia)">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Hyperlink>
+                              <Hyperlink layoutX="10.0" layoutY="87.0" onAction="#SAlinkFourClick" prefHeight="38.0" prefWidth="654.0" style="-fx-text-fill: #314059;" text="• List of Technical Indicators with Descriptions (barchart)">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Hyperlink>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Text fill="WHITE" layoutX="10.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  Linear Regression" underline="true" wrappingWidth="653.3367118835449">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Text>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="60.0" />
+                        <VBox prefHeight="100.0" prefWidth="857.0">
+                           <children>
+                              <Hyperlink onAction="#LRLinkeOneClick" prefHeight="38.0" prefWidth="654.0" style="-fx-text-fill: #314059;" text="• The Linear Regression of Time and Price (Investopedia)">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Hyperlink>
+                              <Hyperlink layoutX="10.0" layoutY="10.0" onAction="#LRLinkTwoClick" prefHeight="38.0" prefWidth="774.0" style="-fx-text-fill: #314059;" text="• Least Squares Method: What It Means, How to Use It, With Examples (Investopedia)">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Hyperlink>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Text fill="WHITE" layoutX="10.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  Moving Average Convergence/Divergence (MACD)" underline="true" wrappingWidth="653.3367118835449">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Text>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="60.0" />
+                        <VBox prefHeight="100.0" prefWidth="858.0">
+                           <children>
+                              <Hyperlink onAction="#MACDLinkOneClick" prefHeight="38.0" prefWidth="774.0" style="-fx-text-fill: #314059;" text="• MACD Indicator Explained, with Formula, Examples, and Limitations (Investopedia)">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Hyperlink>
+                              <Hyperlink layoutX="10.0" layoutY="10.0" onAction="#MACDLinkTwoClick" prefHeight="38.0" prefWidth="774.0" style="-fx-text-fill: #314059;" text="• How to Trade the MACD (Investopedia)">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Hyperlink>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children></AnchorPane>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #5997e3;" BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#returnToHomeView" prefHeight="50.0" prefWidth="110.0" text="Return home" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

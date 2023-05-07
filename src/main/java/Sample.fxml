@@ -43,6 +43,15 @@
                         <Image url="@images/chart.png" />
                      </image></ImageView>
                </graphic></Button>
+            <Button graphicTextGap="10.0" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" onAction="#changeToResourcesView" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #306eba;" text="Resources" textFill="WHITE">
+               <graphic>
+                  <ImageView id="charts_icon" fitHeight="31.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/book-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </VBox>
    </left>

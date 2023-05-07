@@ -151,6 +151,18 @@ public class SampleController implements Initializable {
         
     }
 	
+	public void changeToResourcesView(ActionEvent event) throws IOException {
+        
+        Parent profileParent = FXMLLoader.load(getClass().getResource("resourcesView.fxml"));
+        Scene profileViewScene = new Scene(profileParent);
+        
+        // This line gets the Stage information
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(profileViewScene);
+        window.show();
+        
+    }
+	
 	public void wsjClick(ActionEvent event) throws IOException, URISyntaxException {
 	    
 	    Desktop.getDesktop().browse(new URI("https://www.wsj.com/"));
