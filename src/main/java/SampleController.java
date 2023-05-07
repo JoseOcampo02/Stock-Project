@@ -84,23 +84,6 @@ public class SampleController implements Initializable {
     @FXML
     private Label TSLAPrice;
     
-    /**
-      
-      @author Alonzo Garcia
-      This allows the images to be seen by the user.
-      
-     */
-    
-    @FXML
-    
-    ImageView imageView;
-    
-    Image myImage = new Image(getClass().getResourceAsStream("chart.png"));
-    
-    public void displayImage() {
-     imageView.setImage(myImage);
-    }
-    
     @FXML
     ImageView wsjLogo;
     @FXML
