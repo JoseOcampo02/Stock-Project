@@ -72,7 +72,7 @@ public class MACDandEMA {
         //EMA longTrendPP = new EMA(5, testPrices);
         //longTrendPP.printEma();
    
-        System.out.println( myMACD.findInstances());
+        System.out.println( myMACD.findBuyInstances());
 
         
 
@@ -208,7 +208,7 @@ class MACD {
     
     
 
-    public List<Integer> findInstances() {
+    public List<Integer> findBuyInstances() {
         // Start at index 8 to account for the 9-day EMA offset. makes scense since day 9 is on index 8(0-8) and with 9 days we have our first ema value
         int offset = this.signalPeriod - 1;
         List<Integer> buySignalIndices = new ArrayList<>();
@@ -231,6 +231,28 @@ class MACD {
             // }
         }
         return buySignalIndices;
+    }
+    
+    
+    public List<Integer> findSellInstances() {
+        // Start at index 8 to account for the 9-day EMA offset. makes scense since day 9 is on index 8(0-8) and with 9 days we have our first ema value
+        int offset = this.signalPeriod - 1;
+        List<Integer> indices = new ArrayList<>();
+        
+        
+       
+        for (int i = offset; i < this.macdLine.size() - 0; i++) {
+            double currentMacd = this.macdLine.get(i);
+            double currentSignal = this.signalLine.get(i - offset);
+
+    
+        
+            //Check for MACD line cross below Signal Line while both lines above zero line 
+            if (currentMacd < currentSignal && currentMacd > 0 && currentSignal > 0) {
+            	indices.add(i - offset);
+             }
+        }
+        return indices;
     }
 
 

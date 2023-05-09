@@ -18,17 +18,19 @@ import yahoofinance.histquotes.Interval;
  */
 
 public class LinRegAnalysis {
-
+    
     /**
      * Represents the computed slope of LoBF
      */
-    private double slope;
+    private BigDecimal slope;
     
     /**
      * Represents the computed y-intecept of LoBF
      * (Important for calculating future stock price)
      */
-    private double yInt;
+    private BigDecimal yInt;
+    
+    private boolean successfullyComputed;
     
     /**
      * Represents computed prediction one day into the future
@@ -55,16 +57,18 @@ public class LinRegAnalysis {
      * @throws IOException Throws IOException
      * 
      */
-    public LinRegAnalysis(Stock myStock, BigDecimal[] myData) throws IOException {   // Creating a LinRegAnalysis object will automatically
+    public LinRegAnalysis(BigDecimal[] myData) {   // Creating a LinRegAnalysis object will automatically
                                                                 // perform the necessary calculations for a 1, 2, or 3
                                                                 // day prediction into the future for a given stock
                                                                 // These are saved into private variables with getters
         
         //this.myData = getStockData(myStock);             // Requests and cleans up data for calculations
         this.myData = myData;
-        
+        successfullyComputed = false;
         getSlopeAndYInt(myData);
-        CalcPredictions(myData.length); 
+        if(successfullyComputed) {
+            getFuturePredictions();
+        }
         
     }
     
@@ -116,16 +120,15 @@ public class LinRegAnalysis {
         
     }
     
-    public double getYInt() {
-        
+    public BigDecimal getSlope() {
+        return this.slope;
+    }
+    public BigDecimal getYInt() {
         return this.yInt;
-        
     }
     
-    public double getSlope() {
-        
-        return this.slope;
-        
+    public boolean getSuccess() {
+        return this.successfullyComputed;
     }
     
     /**
@@ -134,39 +137,52 @@ public class LinRegAnalysis {
      * @param myData Array that is formatted to represent xy-coordinates in a plane (x = days, y = price)
      * 
      */
-    private void getSlopeAndYInt(BigDecimal[] myData) {
+    
+    private void getSlopeAndYInt (BigDecimal[] myData) {
         
-        double sumX = 0;
-        double sumY = 0;
-        double sumXSquared = 0;
-        double sumXY = 0;
-        
-        for (int i = 0; i < myData.length; i++) {
+        if (myData.length == 0) {
             
-            sumX += i;
-            sumY += myData[i].doubleValue();
-            sumXSquared += Math.pow(i, 2);
-            sumXY += i * myData[i].doubleValue();
+            System.out.println("Invalid array size, no data to work with");
+            return;
             
         }
         
-        this.slope = ( (myData.length * sumXY) - (sumX * sumY) ) 
-                         / ( (myData.length * sumXSquared) - Math.pow(sumX, 2) );
+        BigDecimal sumX = new BigDecimal("0");
+        BigDecimal sumY = new BigDecimal("0");
+        BigDecimal sumXSquared = new BigDecimal("0");
+        BigDecimal sumXY = new BigDecimal("0");
+        BigDecimal N = new BigDecimal(Integer.toString(myData.length));
         
-        this.yInt = (sumY - (slope * sumX))
-                         /myData.length;
+        for (int i = 0; i < myData.length; i++) {
+            
+            BigDecimal indexAsBD = new BigDecimal(Integer.toString(i));
+            
+            sumX = sumX.add(indexAsBD);
+            sumY = sumY.add(myData[i]);
+            sumXSquared = sumXSquared.add(indexAsBD.multiply(indexAsBD));
+            sumXY = sumXY.add(indexAsBD.multiply(myData[i]));         
+            
+        }
         
+        this.slope = ((N.multiply(sumXY)).subtract((sumX.multiply(sumY)))).
+                divide((N.multiply(sumXSquared)).subtract(sumX.multiply(sumX)), 2, RoundingMode.HALF_UP);
+        this.yInt = (sumY.subtract(slope.multiply(sumX))).divide(N, 2, RoundingMode.HALF_UP); 
+        this.successfullyComputed = true;
     }
     
-    /**
-     * Computes stock price one, two, and three days into the future based on LoBF
-     * @param i Represents one day into the future ( f(i) = price 1 day into future)
-     */
-    private void CalcPredictions(int i) {
+    private void getFuturePredictions() {
         
-        this.OneDay = BigDecimal.valueOf(((this.slope * i) + this.yInt)).setScale(2, RoundingMode.HALF_UP);
-        this.TwoDay = BigDecimal.valueOf(((this.slope * (i + 1)) + this.yInt)).setScale(2, RoundingMode.HALF_UP);
-        this.ThreeDay = BigDecimal.valueOf(((this.slope * (i + 2)) + this.yInt)).setScale(2, RoundingMode.HALF_UP);
+        // Let i = myData.length. Recall that myData[i-1] gives the most recent price close.
+        // Then indices i, i+1, i+2 would correspond to 3 days into the future, and can be
+        // fed into our computed function y(x) = (slope)x + yInt to get predictions
         
+        BigDecimal i = new BigDecimal(Integer.toString(myData.length));
+        this.OneDay = (this.slope.multiply(i)).add(this.yInt).
+                        setScale(2, RoundingMode.HALF_UP);
+        this.TwoDay = (this.slope.multiply(i.add(new BigDecimal("1")))).add(this.yInt).
+                        setScale(2, RoundingMode.HALF_UP);;
+        this.ThreeDay = (this.slope.multiply(i.add(new BigDecimal("2")))).add(this.yInt).
+                        setScale(2, RoundingMode.HALF_UP);;
     }
+    
 }

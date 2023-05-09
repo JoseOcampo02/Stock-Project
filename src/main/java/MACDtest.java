@@ -76,7 +76,7 @@ public class MACDtest {
 	     List<Double> macdLine = myMACD.getMACDline();
 	     List<Double> signalLine = myMACD.getSignalLine();
 	     List<Double> histogram = myMACD.getHistogram();
-	     List<Integer> buySignalIndices = myMACD.findInstances();
+	     List<Integer> buySignalIndices = myMACD.findBuyInstances();
 	     
 	     
 
