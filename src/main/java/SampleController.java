@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -37,38 +38,7 @@ import yahoofinance.histquotes.Interval;
 import javafx.scene.control.Tooltip;
 import javafx.geometry.Point2D;
 
-/**
- * SampleController.java
- * Date: April 18, 2023
- 
- * This class is a JavaFX controller responsible for managing the UI, calling data collector, managing mouse move events, displaying stock data,
- * and MACD indicators on line charts.
- * 
- *
- * Important Functions:
- * - initialize(URL arg0, ResourceBundle arg1): Initializes the controller and sets up the charts.
- *   Input: URL arg0 and ResourceBundle arg1 (JavaFX framework inputs).
- *   Output: None.
- *
- * - handleMouseMove(LineChart<Number, Number> chart, MouseEvent event): Handles mouse movement
- *   events on line charts and displays a tooltip with data values.
- *   Input: LineChart<Number, Number> chart and MouseEvent event.
- *   Output: None.
- *   
- * Important Data Structures:
- * - ArrayList<Double> closingPrices: Stores the closing prices of the stock.
- * - Series<Number, Number> lines: Stores the index and data value of lines that will be displayed.
- * - LineChart<Number, Number> lineChart: Displays the MACD indicators.
- * - LineChart<Number, Number> priceChart: Displays the stock price.
- * 
- * Algorithms: None.
- * 
- *
- *   
- *   
- * @version 1.0
- * @author Christian Jaime
- */
+
 
 public class SampleController implements Initializable {	
 	
@@ -84,7 +54,9 @@ public class SampleController implements Initializable {
     @FXML
     private Label TSLAPrice;
     
-    @FXML
+    
+    
+
     ImageView wsjLogo;
     @FXML
     ImageView cnbcLogo;
@@ -97,11 +69,18 @@ public class SampleController implements Initializable {
     @FXML
     ImageView bloomLogo;
 
+  
+    
+
+	@Override
+
 	public void initialize(URL arg0, ResourceBundle arg1) {
-	    
-	    
+
+	
 	    
 	}
+	
+	
 
 	public void changeToProfileView(ActionEvent event) throws IOException {
         

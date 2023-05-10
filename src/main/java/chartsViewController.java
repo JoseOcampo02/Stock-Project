@@ -347,6 +347,9 @@ public class chartsViewController implements Initializable{
         yAxis.setAutoRanging(true);
         yAxis.setForceZeroInRange(false);
         
+        lineChart.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
+            handleMouseMove(lineChart, event);
+        });
         
     }
     
@@ -387,7 +390,7 @@ public class chartsViewController implements Initializable{
         series2.getData().add(new XYChart.Data<>((myData.length - 1), right));
         
         lineChart.getData().addAll(series1, series2);
-        xAxis.setAutoRanging(true);
+        xAxis.setAutoRanging(false);
         xAxis.setForceZeroInRange(true);
         yAxis.setAutoRanging(true);
         yAxis.setForceZeroInRange(false);
@@ -424,22 +427,22 @@ public class chartsViewController implements Initializable{
        
        
         
+       
+        List<Integer> buySignalIndices = myMACD.findBuyInstances();
         
-        List<Integer> buySignalIndices = findInstances(myMACD.getMACDline(), myMACD.getSignalLine(), realData);
-        //List<Integer> buySignalIndices = myMACD.findInstances();
+        List<Integer> sellSignalIndices = myMACD.findSellInstances();
         
         plotBuySignalIndices(lineChart, buySignalIndices, offsetSignalLine); // buy signal offset is same as signal line offset
-        
-        
-        
-        
+        plotSellSignalIndices(lineChart, sellSignalIndices, offsetSignalLine);
+ 
+
 
         
         // structure for line chart (individual line)  
         Series<Number, Number> priceLine = new XYChart.Series<>();
         priceLine.setName("Price");
         for (int i = 0; i < realData.size(); i++) {
-            priceLine.getData().add(new Data<Number, Number>(i + 1, realData.get(i)));
+            priceLine.getData().add(new Data<Number, Number>(i + 0, realData.get(i)));
         }
        
     
@@ -447,13 +450,13 @@ public class chartsViewController implements Initializable{
         Series<Number, Number> macdline = new XYChart.Series<>();
         macdline.setName("MACD Line");
         for (int i = 0; i < myMACD.getMACDline().size(); i++) {
-            macdline.getData().add(new Data<Number, Number>(i + 1 + offsetMACDLine, myMACD.getMACDline().get(i)));
+            macdline.getData().add(new Data<Number, Number>(i + 0 + offsetMACDLine, myMACD.getMACDline().get(i)));
         }
         
         Series<Number, Number> signalLine = new XYChart.Series<>();
         signalLine.setName("MACD Signal Line");
         for (int i = 0; i < myMACD.getSignalLine().size(); i++) {
-            signalLine.getData().add(new Data<Number, Number>(i + 1 + offsetSignalLine, myMACD.getSignalLine().get(i)));
+            signalLine.getData().add(new Data<Number, Number>(i + 0 + offsetSignalLine, myMACD.getSignalLine().get(i)));
         }
         
         
@@ -461,14 +464,18 @@ public class chartsViewController implements Initializable{
         histogramLine.setName("Histogram");
         
         for (int i = 0; i < myMACD.getHistogram().size(); i++) {
-            histogramLine.getData().add(new Data<Number, Number>(i + 1 + offsetHistogram, myMACD.getHistogram().get(i)));
+            histogramLine.getData().add(new Data<Number, Number>(i + 0 + offsetHistogram, myMACD.getHistogram().get(i)));
         }
+        
+        
+        
         
         
         // adds lines to lineChart
         lineChart.getData().add(macdline);
         lineChart.getData().add(signalLine);
         //lineChart.getData().add(histogramLine);
+        //lineChart.getData().add(tempResizePrevention);
 
         // Adds mouseMoved event to lineChart
         lineChart.addEventHandler(MouseEvent.MOUSE_MOVED, event -> {
@@ -476,7 +483,7 @@ public class chartsViewController implements Initializable{
         });
 
         xAxis.setAutoRanging(true);
-        xAxis.setForceZeroInRange(false);
+        xAxis.setForceZeroInRange(true);
         yAxis.setAutoRanging(true);
         yAxis.setForceZeroInRange(false);
         
@@ -484,28 +491,7 @@ public class chartsViewController implements Initializable{
         
     }
     
-    private static List<Integer> findInstances(List<Double> macd, List<Double> signal, List<Double> close) {
-        // Start at index 8 to account for the 9-day EMA offset
-        int offset = 8;
-        List<Integer> buySignalIndices = new ArrayList<>();
-
-        for (int i = 8; i < macd.size() - 1; i++) {
-            double currentMacd = macd.get(i);
-            double currentSignal = signal.get(i - offset);
-
-            // Check for MACD line above Signal Line, both lines below zero line (negative numbers)
-            if (currentMacd > currentSignal && currentMacd < 0 && currentSignal < 0) {
-                buySignalIndices.add(i - offset);
-            }
-
-            // If you want to check for sell signals when the MACD line is below the Signal line and both lines are above the Zero line, you can add the following condition:
-            // Check for MACD line below Signal Line, both lines above zero line (positive numbers)
-            // if (currentMacd < currentSignal && currentMacd > 0 && currentSignal > 0) {
-            //     System.out.println("Sell signal at index: " + indexWithOffset + " with price: " + close.get(i));
-            // }
-        }
-        return buySignalIndices;
-    }
+    
     
     private void plotBuySignalIndices(LineChart<Number, Number> chart, List<Integer> indices, int slOffset) {
         int i = 0;
@@ -522,6 +508,22 @@ public class chartsViewController implements Initializable{
             i++;
         }
     }
+    private void plotSellSignalIndices(LineChart<Number, Number> chart, List<Integer> indices, int slOffset) {
+        int i = 0;
+        //int offsetSL 
+        for (Integer index : indices) {
+            XYChart.Series<Number, Number> sellSignalSeries = new XYChart.Series<>();
+            sellSignalSeries.setName("Sell Signal at " + (index + slOffset));
+
+            // Add two data points to create a vertical line
+            sellSignalSeries.getData().add(new Data<Number, Number>(indices.get(i) + slOffset, 0));
+       
+
+            chart.getData().add(sellSignalSeries);
+            i++;
+        }
+    }
+    
     
     /**
      * Handles mouse movement events on line charts and displays a tooltip with data values.
@@ -531,54 +533,56 @@ public class chartsViewController implements Initializable{
      * @author Christian Jaime
      */
     
-    //X axis location is a little off(by like 2) for the MACD chart 
+
     private void handleMouseMove(LineChart<Number, Number> chart, MouseEvent event) {
-        if (tooltip == null) {
-            tooltip = new Tooltip();
-        }
+	    if (tooltip == null) {
+	        tooltip = new Tooltip();
+	    }
 
-        double mouseX = event.getX();
-        double mouseY = event.getY();
+	    double mouseX = event.getX();
+	    double mouseY = event.getY();
 
-        // Calculate X axis value based on mouse position
-        NumberAxis xAxis = (NumberAxis) chart.getXAxis();
-        double xValue = xAxis.getValueForDisplay(mouseX).doubleValue() - 10;
 
-        // Create a StringBuilder to build the tooltip text
-        StringBuilder tooltipText = new StringBuilder("Mouse Position X: " + String.format("%.2f", xValue) + "\n");
-        //StringBuilder tooltipText = new StringBuilder();
-        // Loop through all Series in the chart
-        for (XYChart.Series<Number, Number> series : chart.getData()) {
-            // Find the closest data point to the current X-axis value
-            Data<Number, Number> closestDataPoint = null;
-            double minDistance = Double.MAX_VALUE;
-            for (Data<Number, Number> data : series.getData()) {
-                double dataXValue = data.getXValue().doubleValue();
-                
-                double distance = Math.abs(dataXValue - xValue);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    closestDataPoint = data;
-                }
-            }
+	    
+	    // Calculate X axis value based on mouse position
+	    NumberAxis xAxis = (NumberAxis) chart.getXAxis();
+	    double xValue = xAxis.getValueForDisplay(mouseX).doubleValue() - 7; //offset adjuster
+	
 
-            // Append the data point to the tooltip text
-            if (closestDataPoint != null) {
-                tooltipText.append(series.getName() + ": Closest index X(" + String.format("%.2f", closestDataPoint.getXValue().doubleValue()) + ")  Y Values (" + String.format("%.2f", closestDataPoint.getYValue().doubleValue()) + ")\n");
-            }
-        }
-            
-            
-            
+	    
+	    // Create a StringBuilder to build the tooltip text
+	    StringBuilder tooltipText = new StringBuilder("Mouse Position X: " + String.format("%.2f", xValue) + "\n");
+	  
+	    
+	    // Loop through all Series in the chart
+	    for (XYChart.Series<Number, Number> series : chart.getData()) {
+	        // Find the closest data point to the current X-axis value
+	        Data<Number, Number> closestDataPoint = null;
+	        double minDistance = Double.MAX_VALUE;
+	        for (Data<Number, Number> data : series.getData()) {
+	            double dataXValue = data.getXValue().doubleValue();
+	            
+	            double distance = Math.abs(dataXValue - xValue);
+	            if (distance < minDistance) {
+	                minDistance = distance;
+	                closestDataPoint = data;
+	            }
+	        }
 
-        // Set the tooltip text and show it
-        tooltip.setText(tooltipText.toString());
-        Node node = (Node) event.getSource();
-        Point2D point = node.localToScene(mouseX, mouseY);
-        tooltip.show(node, point.getX() + node.getScene().getWindow().getX() + 15, point.getY() + node.getScene().getWindow().getY() + 15);
-       
-        
-    }
+	        // Append the data point to the tooltip text
+	        if (closestDataPoint != null) {
+	            tooltipText.append(series.getName() + ": Closest index X(" + String.format("%.2f", closestDataPoint.getXValue().doubleValue()) + ")  Y Values (" + String.format("%.2f", closestDataPoint.getYValue().doubleValue()) + ")\n");
+	        }
+	    }
+	        
+
+	    // Set the tool tip text and show it
+	    tooltip.setText(tooltipText.toString());
+	    Node node = (Node) event.getSource();
+	    Point2D point = node.localToScene(mouseX, mouseY);
+	    tooltip.show(node, point.getX() + node.getScene().getWindow().getX() + 35, point.getY() + node.getScene().getWindow().getY() + 35); 
+    
+	}
     
     public void returnToHomeView(ActionEvent event) throws IOException {
         
