@@ -59,7 +59,7 @@
                                        </toggleGroup>
                                     </RadioButton>
                                     <RadioButton mnemonicParsing="false" onAction="#stockSelection1" text="NYSE Composite" toggleGroup="$stockBtns" />
-                                    <RadioButton mnemonicParsing="false" onAction="#stockSelection2" text="TSLA" toggleGroup="$stockBtns" />
+                                    <RadioButton mnemonicParsing="false" onAction="#stockSelection2" text="AAPL" toggleGroup="$stockBtns" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="52.0" prefWidth="1000.0" spacing="30.0">
