@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -46,21 +47,34 @@
       </AnchorPane>
    </top>
    <center>
-      <VBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
-         <Label text="User Name:" textFill="WHITE" />
-         <TextField fx:id="nameTextField">
-            <VBox.margin>
-               <Insets bottom="50.0" left="250.0" right="250.0" />
-            </VBox.margin></TextField>
-         <Label text="TSLA stock shares owned:" textFill="WHITE" />
-         <TextField fx:id="sharesTextField">
-            <VBox.margin>
-               <Insets left="250.0" right="250.0" />
-            </VBox.margin></TextField>
-         <Button onAction="#saveUserInfo" style="-fx-background-color: #306eba;" text="Save" textFill="WHITE">
-            <VBox.margin>
-               <Insets bottom="150.0" top="25.0" />
-            </VBox.margin></Button>
-      </VBox>
-   </center>
+   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
+      <Label text="Name" textFill="WHITE" />
+      <TextField fx:id="nameTextField" prefWidth="809.0">
+         <VBox.margin>
+            <Insets left="250.0" right="250.0" />
+         </VBox.margin>
+      </TextField>
+      <Label text="TSLA stock shares owned:" textFill="WHITE" />
+      <TextField fx:id="sharesTextField">
+         <VBox.margin>
+            <Insets left="250.0" right="250.0" />
+         </VBox.margin>
+      </TextField>
+      <Label text="Console Output:" textFill="WHITE" /> 
+      <TextArea fx:id="consoleOutputTextArea" editable="false"> 
+         <VBox.margin>
+            <Insets left="250.0" right="250.0" />
+         </VBox.margin>
+      </TextArea> 
+      <Button onAction="#saveUserInfo" style="-fx-background-color: #306eba;" text="Calculate Worth" textFill="WHITE">
+         <VBox.margin>
+            <Insets top="25.0" />
+         </VBox.margin>
+      </Button>
+      <Text fx:id="numberText" fill="WHITE" text="">
+            <font>
+               <Font size="1.0" />
+            </font></Text>
+   </VBox>
+</center>
 </BorderPane>
