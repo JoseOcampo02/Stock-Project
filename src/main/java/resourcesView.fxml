@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.image.Image?>
@@ -29,13 +28,10 @@
          <children>
             <VBox prefHeight="550.0" prefWidth="1000.0">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock Analysis" underline="true" wrappingWidth="173.33671188354492">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="  Stock Analysis" underline="true" wrappingWidth="653.3367118835449">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets left="400.0" top="35.0" />
-                     </VBox.margin>
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -66,13 +62,10 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <Text fill="WHITE" layoutX="10.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Linear Regression" underline="true" wrappingWidth="200.33671188354492">
+                  <Text fill="WHITE" layoutX="10.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  Linear Regression" underline="true" wrappingWidth="653.3367118835449">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets left="400.0" top="35.0" />
-                     </VBox.margin>
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -93,13 +86,10 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <Text fill="WHITE" layoutX="10.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moving Average Convergence/Divergence (MACD)" underline="true" wrappingWidth="544.3367118835449">
+                  <Text fill="WHITE" layoutX="10.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  Moving Average Convergence/Divergence (MACD)" underline="true" wrappingWidth="653.3367118835449">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets left="250.0" top="35.0" />
-                     </VBox.margin>
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -127,7 +117,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #5997e3;" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#returnToHomeView" prefHeight="50.0" prefWidth="110.0" style="-fx-background-color: #306eba;" text="Return home" textFill="WHITE" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#returnToHomeView" prefHeight="50.0" prefWidth="110.0" text="Return home" />
          </children>
       </HBox>
    </bottom>
