@@ -1,11 +1,5 @@
 import java.io.IOException;
 import java.math.*;
-import java.util.Calendar;
-import java.util.List;
-import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
-import yahoofinance.histquotes.HistoricalQuote;
-import yahoofinance.histquotes.Interval;
 
 /**
  * 
@@ -69,32 +63,6 @@ public class LinRegAnalysis {
         if(successfullyComputed) {
             getFuturePredictions();
         }
-        
-    }
-    
-    /**
-     * 
-     * @param myStock Stock to get data on
-     * @return Array that is formatted to represent xy-coordinates in a plane (x = days, y = price)
-     * @throws IOException
-     * 
-     */
-    private BigDecimal[] getStockData(Stock myStock) throws IOException{
-        
-        Calendar from = Calendar.getInstance();
-        Calendar to = Calendar.getInstance();
-        from.add(Calendar.MONTH, -1); // from 1 month ago, default
-        List<HistoricalQuote> myQuotes = myStock.getHistory(from, to, Interval.DAILY);
-        
-        
-        int dataSetSize = myQuotes.size();
-        BigDecimal[] myData = new BigDecimal[dataSetSize];
-        for (int i = 0; i < dataSetSize; i++)
-            myData[i] = myQuotes.get(i).getClose().setScale(2, RoundingMode.HALF_UP);
-        
-        
-        
-        return myData;
         
     }
     

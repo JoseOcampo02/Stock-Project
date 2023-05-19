@@ -54,9 +54,9 @@ public class DataProcessing {
     }
     
     /**
-     * Static method to be used by controller and LinRegAnalysis classes
-     * in order to generate price chart or Linear Regression chart.
-     * Collects one month of market data by default
+     * Static method to be used by generateMACDChart
+     * to generate MACD analysis chart. Collects 190
+     * market days of data by default.
      * 
      * @author Christian Jaime
      * @param myStock Stock to collect data from

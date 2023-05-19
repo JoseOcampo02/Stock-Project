@@ -1,19 +1,8 @@
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
-
-import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
-import yahoofinance.histquotes.HistoricalQuote;
-import yahoofinance.histquotes.Interval;
 
 /**
  * MACDandEMA.java
@@ -355,88 +344,3 @@ class EMA {
 	
     
 }
-
-
-/**
- * Constructs a new DataCollection object with the given ticker and number of days back.
- *
- * @param ticker the stock's ticker symbol
- * @param daysBack the number of days back to fetch historical data
- * @throws IOException if there is an error fetching the data
- */
-
-/*
-class DataCollection {
-    //private String ticker;
-    //private int daysBack;
-    private List<Double> closingPrices;
-
-    public DataCollection(String ticker, int daysBack) throws IOException {
-        //this.ticker = ticker;
-        this.daysBack = daysBack;
-        collectData();
-    }
-    */
-    
-    
-    /**
-     * Collects historical data using the YahooFinance API.
-     *
-     * @throws IOException if there is an issue fetching the data
-     */
-    
-    /*
-    private void collectData() throws IOException {
-        Calendar from = Calendar.getInstance();
-        from.add(Calendar.DAY_OF_MONTH, -daysBack);
-        Calendar to = Calendar.getInstance();
-        Stock stock = YahooFinance.get(ticker, from, to, Interval.DAILY);
-        List<HistoricalQuote> history = stock.getHistory();
-        closingPrices = new ArrayList<Double>();
-        for (HistoricalQuote quote : history) {
-            double closePrice = quote.getAdjClose().doubleValue();
-            closingPrices.add(closePrice);
-        }
-    }
-    */
-
-    /**
-     * @return the ticker symbol in string
-     */
-    //public String getTicker() {
-        //return ticker;
-    //}
-
-    /**
-     * @return the int of how many days back in time.
-     */
-    //public int getDaysBack() {
-        //return daysBack;
-    //}
-
-    /**
-     * @return the list closing prices
-     */
-    //public List<Double> getClosingPrices() {
-        //return closingPrices;
-    //}
-
-    /**
-     * @return the int amount of market days and or size
-     */
-    //public int getMarketDays() {
-        //return closingPrices.size();
-    //}
-    
-    
-    /**
-     * Prints the closing prices.
-     */
-    //public void printClosingPrices() {
-        //int i = 0;
-        //for (double price : closingPrices) {
-            //System.out.println(i + " Closing price: " + price);
-            //i++;
-        //}
-    //}
-//}
