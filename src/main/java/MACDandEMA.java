@@ -364,17 +364,19 @@ class EMA {
  * @param daysBack the number of days back to fetch historical data
  * @throws IOException if there is an error fetching the data
  */
+
+/*
 class DataCollection {
-    private String ticker;
-    private int daysBack;
+    //private String ticker;
+    //private int daysBack;
     private List<Double> closingPrices;
 
     public DataCollection(String ticker, int daysBack) throws IOException {
-        this.ticker = ticker;
+        //this.ticker = ticker;
         this.daysBack = daysBack;
         collectData();
     }
-
+    */
     
     
     /**
@@ -382,6 +384,8 @@ class DataCollection {
      *
      * @throws IOException if there is an issue fetching the data
      */
+    
+    /*
     private void collectData() throws IOException {
         Calendar from = Calendar.getInstance();
         from.add(Calendar.DAY_OF_MONTH, -daysBack);
@@ -394,45 +398,45 @@ class DataCollection {
             closingPrices.add(closePrice);
         }
     }
-
+    */
 
     /**
      * @return the ticker symbol in string
      */
-    public String getTicker() {
-        return ticker;
-    }
+    //public String getTicker() {
+        //return ticker;
+    //}
 
     /**
      * @return the int of how many days back in time.
      */
-    public int getDaysBack() {
-        return daysBack;
-    }
+    //public int getDaysBack() {
+        //return daysBack;
+    //}
 
     /**
      * @return the list closing prices
      */
-    public List<Double> getClosingPrices() {
-        return closingPrices;
-    }
+    //public List<Double> getClosingPrices() {
+        //return closingPrices;
+    //}
 
     /**
      * @return the int amount of market days and or size
      */
-    public int getMarketDays() {
-        return closingPrices.size();
-    }
+    //public int getMarketDays() {
+        //return closingPrices.size();
+    //}
     
     
     /**
      * Prints the closing prices.
      */
-    public void printClosingPrices() {
-        int i = 0;
-        for (double price : closingPrices) {
-            System.out.println(i + " Closing price: " + price);
-            i++;
-        }
-    }
-}
+    //public void printClosingPrices() {
+        //int i = 0;
+        //for (double price : closingPrices) {
+            //System.out.println(i + " Closing price: " + price);
+            //i++;
+        //}
+    //}
+//}

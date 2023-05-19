@@ -73,11 +73,14 @@ public class chartsViewController implements Initializable{
             stockData = new BigDecimal[3][];
             
             stockArr[0] = YahooFinance.get("^GSPC");
-            stockData[0] = DataCollection(stockArr[0]);
+            stockData[0] = DataProcessing.collectData(stockArr[0]);
+            //stockData[0] = DataCollection(stockArr[0]);
             stockArr[1] = YahooFinance.get("^NYA");
-            stockData[1] = DataCollection(stockArr[1]);
+            stockData[1] = DataProcessing.collectData(stockArr[1]);
+            //stockData[1] = DataCollection(stockArr[1]);
             stockArr[2] = YahooFinance.get("TSLA");
-            stockData[2] = DataCollection(stockArr[2]);
+            stockData[2] = DataProcessing.collectData(stockArr[2]);
+            //stockData[2] = DataCollection(stockArr[2]);
             
         } catch (Exception e) {
             
@@ -494,7 +497,7 @@ public class chartsViewController implements Initializable{
         series2.getData().add(new XYChart.Data<>((myData.length - 1), right));
         
         lineChart.getData().addAll(series1, series2);
-        xAxis.setAutoRanging(false);
+        xAxis.setAutoRanging(true);
         xAxis.setForceZeroInRange(true);
         yAxis.setAutoRanging(true);
         yAxis.setForceZeroInRange(false);
@@ -508,15 +511,16 @@ public class chartsViewController implements Initializable{
         
         //collects data from yahooFinace
         List<Double> realData = new ArrayList<Double>();
-        DataCollection history = null;
+        //DataCollection history = null;
         
         try {
-            history = new DataCollection("AAPL", 190);
+            //history = new DataCollection(stockArr[stockSelection].getSymbol(), 190);
+            realData = DataProcessing.collectDataMACD(stockArr[stockSelection], 190);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        realData = history.getClosingPrices();
+        //realData = history.getClosingPrices();
         
         //ArrayList<Double> realData = toDoubleList(stockData[stockSelection]);
         
