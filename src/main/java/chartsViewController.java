@@ -60,13 +60,13 @@ public class chartsViewController implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1) {
         stockSelection = 0;
         chartSelection = 0;
-        
+        /*
         stockArr = new Stock[3];
         stockData = new BigDecimal[3][];
         // Filling 26 days worth of data for S&P500 manually
         dataCollectionManual();        
+        */
         
-        /*
         try {
             
             stockArr = new Stock[3];
@@ -83,7 +83,7 @@ public class chartsViewController implements Initializable{
             
         }
         
-        */
+        
         
     }
     
@@ -505,7 +505,7 @@ public class chartsViewController implements Initializable{
         
 ///*
         
-        /*
+        
         //collects data from yahooFinace
         List<Double> realData = new ArrayList<Double>();
         DataCollection history = null;
@@ -517,8 +517,8 @@ public class chartsViewController implements Initializable{
             e.printStackTrace();
         }
         realData = history.getClosingPrices();
-        */
-        ArrayList<Double> realData = toDoubleList(stockData[stockSelection]);
+        
+        //ArrayList<Double> realData = toDoubleList(stockData[stockSelection]);
         
 
         //create MACD object

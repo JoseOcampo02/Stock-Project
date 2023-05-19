@@ -37,7 +37,9 @@ public class GUI extends Application {
 	
 	public static void main(String[] args) {
 		
-		
+	    // This line downgrades the YahooFinance API from v7 to v6, since data collection had not been working for v7 lately
+	    System.setProperty("yahoofinance.baseurl.quotesquery1v7", "https://query1.finance.yahoo.com/v6/finance/quote");
+	    
 		launch(args);
 	}
 }
